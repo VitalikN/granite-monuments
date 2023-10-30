@@ -19,6 +19,7 @@ const MonumentsList: FC<MonumentsListProps> = ({ monumentsData, title }) => {
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
   );
+
   if (!monumentsData || monumentsData.length === 0) {
     return (
       <section className={styles.technical__section}>

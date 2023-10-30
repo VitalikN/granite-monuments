@@ -1,7 +1,11 @@
 import Product from "@/components/Product";
-import { CatalogLayoutProps } from "@/types/types";
+// import { CatalogLayoutProps } from "@/types/types";
 
-export const CatalogLayout: React.FC<CatalogLayoutProps> = ({ children }) => {
+export default function CatalogLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
       <Product />
@@ -9,4 +13,4 @@ export const CatalogLayout: React.FC<CatalogLayoutProps> = ({ children }) => {
       {children}
     </>
   );
-};
+}
