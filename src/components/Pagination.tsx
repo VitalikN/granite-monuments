@@ -1,24 +1,23 @@
-import { useState } from "react";
+import { useState, FC } from "react";
 
 import styles from "../sass/layouts/pagination.module.scss";
+import { PaginationProps } from "@/types/types";
+import { usePaginationLogic } from "./hooks";
 
-export const Pagination = ({
+export const Pagination: FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
   onPageChange,
   initialPage = 1,
 }) => {
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
-
+  const { currentPage, totalPages, handlePageChange } = usePaginationLogic({
+    totalItems,
+    itemsPerPage,
+    initialPage,
+  });
   if (totalPages <= 1) {
     return null;
   }
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-    onPageChange(page);
-  };
 
   return (
     <div className={styles.pagination}>

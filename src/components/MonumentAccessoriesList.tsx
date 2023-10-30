@@ -1,12 +1,9 @@
 "use client";
 
-// import "../../sass/utils/_container.scss";
-// import "../../sass/layouts/imageList.scss";
-
 import singleMonument from "./MonumentsList/singleMonument.json";
 import MonumentsList from "./MonumentsList";
 
-const MonumentAccessoriesList = () => {
+const MonumentAccessoriesList: React.FC = () => {
   return (
     <MonumentsList
       monumentsData={singleMonument}

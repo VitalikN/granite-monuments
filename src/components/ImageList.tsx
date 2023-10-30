@@ -5,31 +5,15 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 import styles from "../sass/layouts/imageList.module.scss";
+import { ImageListProps } from "@/types/types";
+import { useSimpleLightbox } from "./hooks";
 
-export const ImageList = ({
+export const ImageList: React.FC<ImageListProps> = ({
   images,
   handleImagesPerPageChange,
   imagesPerPage,
 }) => {
-  useEffect(() => {
-    const lightbox = new SimpleLightbox(".single__list a", {
-      captionDelay: 250,
-      disableRightClick: true,
-      showCounter: false,
-      scrollZoom: false,
-    });
-
-    lightbox.on("shown.simplelightbox", () => {
-      document.body.classList.add("body-lock");
-    });
-
-    lightbox.on("close.simplelightbox", () => {
-      document.body.classList.remove("body-lock");
-    });
-    return () => {
-      lightbox.destroy();
-    };
-  }, [images]);
+  useSimpleLightbox(images);
 
   return (
     <>

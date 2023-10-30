@@ -1,6 +1,6 @@
 import styles from "../sass/layouts/about.module.scss";
 
-const AboutUs = () => {
+const AboutUs: React.FC = () => {
   return (
     <section className={styles.about__section}>
       <div className={`${styles.container} ${styles.about__overlay}`}>
@@ -86,7 +86,7 @@ const AboutUs = () => {
             </p>
           </li>
         </ul>
-        <p className={styles.about__text} invite>
+        <p className={`${styles.about__text} ${styles.invite}`}>
           Запрошуємо вас ознайомитися з нашими виробами в онлайн-каталозі. Ми
           гарантуємо креативний підхід, високу якість виробів та відповідальне
           виконання вашого замовлення. Чекаємо на вас!

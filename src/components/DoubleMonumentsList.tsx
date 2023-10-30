@@ -4,7 +4,7 @@ import doubleMonuments from "./MonumentsList/doubleMonuments.json";
 
 import MonumentsList from "./MonumentsList";
 
-const DoubleMonumentsList = () => {
+const DoubleMonumentsList: React.FC = () => {
   return (
     <MonumentsList
       monumentsData={doubleMonuments}

@@ -3,7 +3,7 @@
 import singleMonument from "./MonumentsList/singleMonument.json";
 import MonumentsList from "./MonumentsList";
 
-const SingleMonumentsList = () => {
+const SingleMonumentsList: React.FC = () => {
   return (
     <MonumentsList monumentsData={singleMonument} title="Одинарні пам`ятники" />
   );

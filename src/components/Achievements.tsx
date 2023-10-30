@@ -4,7 +4,7 @@ import { BiSolidLike } from "react-icons/bi";
 
 import styles from "../sass/layouts/achievements.module.scss";
 
-const Achievements = () => {
+const Achievements: React.FC = () => {
   return (
     <section className={styles.achievements__section}>
       <div className={styles.container}>

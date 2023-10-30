@@ -1,3 +1,5 @@
+"use client";
+import React from "react";
 import { BsImages } from "react-icons/bs";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { LiaClipboardListSolid } from "react-icons/lia";
@@ -7,7 +9,7 @@ import { TbTruckDelivery } from "react-icons/tb";
 
 import styles from "../sass/layouts/order.module.scss";
 
-const Order = () => {
+const Order: React.FC = () => {
   return (
     <section className={styles.order__section}>
       <div className={styles.container}>

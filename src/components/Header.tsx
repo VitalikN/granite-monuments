@@ -5,21 +5,10 @@ import MenuItems from "./MenuItems";
 import Link from "next/link";
 
 import styles from "../sass/layouts/header.module.scss";
+import { useToggleMenu } from "./hooks";
 
-const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.classList.add("body-no-scroll");
-    } else {
-      document.body.classList.remove("body-no-scroll");
-    }
-
-    return () => {
-      document.body.classList.remove("body-no-scroll");
-    };
-  }, [menuOpen]);
+const Header: React.FC = () => {
+  const { menuOpen, setMenuOpen } = useToggleMenu();
 
   return (
     <header className={styles.header}>

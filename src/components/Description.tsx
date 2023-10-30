@@ -1,6 +1,6 @@
 import styles from "../sass/layouts/description.module.scss";
 
-const Description = () => {
+const Description: React.FC = () => {
   return (
     <section className={styles.description__section}>
       <div className={styles.description__container}>

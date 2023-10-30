@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import styles from "../sass/layouts/product.module.scss";
 
-const Product = () => {
+const Product: React.FC = () => {
   return (
     <section className={styles.product__section}>
       <div className={styles.container}>

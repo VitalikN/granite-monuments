@@ -1,14 +1,24 @@
-import { useState } from "react";
+import { FC } from "react";
 import { Pagination } from "./Pagination";
 import { ImageList } from "./ImageList";
 import Image from "next/image";
 
 import styles from "../sass/layouts/imageList.module.scss";
+import { MonumentsListProps } from "@/types/types";
+import { usePagination } from "./hooks";
 
-const MonumentsList = ({ monumentsData, title }) => {
-  const [imagesPerPage, setImagesPerPage] = useState(10);
-  const [currentPage, setCurrentPage] = useState(1);
+const MonumentsList: FC<MonumentsListProps> = ({ monumentsData, title }) => {
+  const {
+    itemsPerPage,
+    currentPage,
+    handleItemsPerPageChange,
+    setCurrentPage,
+  } = usePagination(10);
 
+  const displayedImages = monumentsData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
   if (!monumentsData || monumentsData.length === 0) {
     return (
       <section className={styles.technical__section}>
@@ -29,16 +39,6 @@ const MonumentsList = ({ monumentsData, title }) => {
     );
   }
 
-  const displayedImages = monumentsData.slice(
-    (currentPage - 1) * imagesPerPage,
-    currentPage * imagesPerPage
-  );
-
-  const handleImagesPerPageChange = (event) => {
-    setImagesPerPage(Number(event.target.value));
-    setCurrentPage(1);
-  };
-
   return (
     <section className={styles.single__section}>
       <div className={styles.container}>
@@ -46,13 +46,13 @@ const MonumentsList = ({ monumentsData, title }) => {
 
         <ImageList
           images={displayedImages}
-          handleImagesPerPageChange={handleImagesPerPageChange}
-          imagesPerPage={imagesPerPage}
+          handleImagesPerPageChange={handleItemsPerPageChange}
+          imagesPerPage={itemsPerPage}
         />
 
         <Pagination
           totalItems={monumentsData.length}
-          itemsPerPage={imagesPerPage}
+          itemsPerPage={itemsPerPage}
           onPageChange={setCurrentPage}
         />
       </div>

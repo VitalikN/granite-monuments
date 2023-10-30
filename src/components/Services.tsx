@@ -3,7 +3,7 @@ import { IoMdCheckboxOutline } from "react-icons/io";
 
 import styles from "../sass/layouts/services.module.scss";
 
-const Services = () => {
+const Services: React.FC = () => {
   return (
     <section className={styles.services__section}>
       <div className={styles.container}>

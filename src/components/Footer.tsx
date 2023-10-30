@@ -6,7 +6,7 @@ import MenuItems from "./MenuItems";
 import { usePathname } from "next/navigation";
 import styles from "../sass/layouts/footer.module.scss";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const pathname = usePathname();
 
   return (
