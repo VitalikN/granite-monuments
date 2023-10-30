@@ -1,0 +1,88 @@
+@import "../utils/mixins.module";
+@import "../utils/container.module";
+
+.footer__section {
+  padding: 4em 0em 5em 0em;
+
+  &.home {
+    background-image: linear-gradient(
+        rgba(41, 23, 12, 0.6),
+        rgba(41, 23, 12, 0.6)
+      ),
+      url("/content.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &.other {
+    background-color: #29170c;
+    border-style: solid;
+    border-width: 1px 0px 0px 0px;
+    border-color: #ffffff;
+    transition: background 0.3s, border 0.3s, border-radius 0.3s,
+      box-shadow 0.3s;
+  }
+}
+
+.footer__container {
+  @include tablet {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+.footer__title {
+  font-family: "Playfair Display", Sans-serif;
+  font-size: 2em;
+  font-weight: 400;
+  line-height: 1.2em;
+  letter-spacing: 0px;
+  font-style: normal;
+
+  background: linear-gradient(90deg, #bd976e 45%, #ffffff 50%, #bd976e 60%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: color 0.5s;
+}
+.footer__address {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  @include tablet {
+    padding-left: 20px;
+    width: 300px;
+  }
+  @media screen and (max-width: 768px) {
+    align-items: center;
+  }
+}
+.footer__link {
+  font-family: "Playfair Display", Sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.4em;
+  font-style: normal;
+
+  background: linear-gradient(90deg, #bd976e, #ffffff, #bd976e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: color 0.5s;
+  @media screen and (max-width: 768px) {
+    text-align: center;
+  }
+}
+.footer__tel {
+  font-size: 1.5rem;
+}
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  @include tablet {
+    padding-top: 0;
+    align-items: start;
+  }
+}

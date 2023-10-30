@@ -1,10 +1,19 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Hero from "@/components/Hero";
+import "./page.module.css";
+import Achievements from "@/components/Achievements";
+import Services from "@/components/Services";
+import Product from "@/components/Product";
+import Order from "@/components/Order";
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className={styles.main}>
-      <div className={styles.center}>hi</div>
-    </main>
+    <>
+      <Hero />
+      <Achievements />
+      <Product />
+      <Services />
+      <Order />
+    </>
   );
-}
+};
+export default Home;
