@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, ReactNode } from "react";
 
 export interface UsePaginationLogicProps {
   totalItems: number;
@@ -36,4 +36,8 @@ export interface MonumentsDataProps {
 export interface MonumentsListProps {
   monumentsData: MonumentsDataProps[];
   title: string;
+}
+
+export interface CatalogLayoutProps {
+  children: ReactNode;
 }
