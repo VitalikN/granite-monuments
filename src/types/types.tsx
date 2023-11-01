@@ -41,3 +41,6 @@ export interface MonumentsListProps {
 export interface CatalogLayoutProps {
   children: ReactNode;
 }
+export interface ErrorFeedbackProps {
+  name: string;
+}
