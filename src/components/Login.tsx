@@ -2,16 +2,16 @@
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
-import styles from "../sass/layouts/login.module.scss";
-import { ErrorFeedbackProps } from "../types/types";
+import { ErrorFeedbackProps, FormValues } from "../types/types";
 import { validationSchema } from "../types/validationSchemas";
+import { useLoginMutation } from "@/redux/auth/authAPI";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import styles from "../sass/layouts/login.module.scss";
 
 const Login: React.FC = () => {
-  //   const handleLogin = (username: string, password: string) => {
-  //     if (username && password) {
-  //       login({ username, password });
-  //     }
-  //   };
+  const [login, { data, isLoading, isError, error }] = useLoginMutation();
+  const router = useRouter();
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -21,15 +21,32 @@ const Login: React.FC = () => {
     );
   };
 
+  const handleLogin = async (values: FormValues) => {
+    try {
+      await login(values);
+
+      //   if (response && response.data.token) {
+      //     router.push("/monuments-admin");
+      //   }
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+  useEffect(() => {
+    if (data && data.token) {
+      router.push("/monuments-admin");
+    } else {
+      router.push("/admin");
+    }
+  }, [data, router]);
+
   return (
     <section className={styles.section__login}>
       <div className={`${styles.container} ${styles.login__container__form}`}>
         <Formik
-          initialValues={{ username: "", password: "" }}
+          initialValues={{ email: "", password: "" }}
           onSubmit={(values, { resetForm }) => {
-            // handleLogin(values.username, values.password);
-            console.log(values);
-
+            handleLogin(values);
             resetForm();
           }}
           validationSchema={validationSchema}
@@ -38,15 +55,15 @@ const Login: React.FC = () => {
             <Form className={styles.form}>
               <div className={styles.form__box}>
                 <label className={styles.label}>
-                  Name:
+                  email:
                   <Field
                     className={styles.input}
-                    type="text"
-                    name="username"
-                    error={touched.username && errors.username}
+                    type="email"
+                    name="email"
+                    error={touched.email && errors.email}
                   />
                 </label>
-                <ErrorFeedback name="username" />
+                <ErrorFeedback name="email" />
               </div>
               <div className={styles.form__box}>
                 <label className={styles.label}>

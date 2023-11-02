@@ -1,7 +1,11 @@
 import Login from "@/components/Login";
 
 const Admin = () => {
-  return <Login />;
+  return (
+    <>
+      <Login />
+    </>
+  );
 };
 
 export default Admin;

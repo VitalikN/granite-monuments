@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import "./page.module.css";
 import Achievements from "@/components/Achievements";
 import Services from "@/components/Services";
 import Product from "@/components/Product";

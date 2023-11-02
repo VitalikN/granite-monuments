@@ -44,3 +44,13 @@ export interface CatalogLayoutProps {
 export interface ErrorFeedbackProps {
   name: string;
 }
+
+export type RootState = {
+  auth: {
+    token: string | null;
+  };
+};
+export interface FormValues {
+  email: string;
+  password: string;
+}

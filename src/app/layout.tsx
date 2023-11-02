@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ReduxProvider from "@/redux/ReduxProvider/ReduxProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,11 +29,14 @@ export default function RootLayout({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <body className={inter.className}>
-        <Header />
 
-        <main>{children}</main>
-        <Footer />
+      <body className={inter.className}>
+        <ReduxProvider>
+          <Header />
+
+          <main>{children}</main>
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );
