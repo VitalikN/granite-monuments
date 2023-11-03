@@ -24,29 +24,34 @@ const authSlice = createSlice({
     clearToken: (state) => {
       state.token = null;
     },
-    setToken: (state, action) => {
-      state.token = action.payload;
-    },
-
-    startTokenRefresh: (state) => {
-      state.isRefreshing = true;
-    },
-
-    completeTokenRefresh: (state) => {
-      state.isRefreshing = false;
-    },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      authApi.endpoints.login.matchFulfilled,
-      (state, action) => {
+    builder
+      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, action) => {
         state.admin.email = action.payload.email;
         state.admin.id = action.payload.id;
         state.token = action.payload.token;
         state.isLoggedIn = true;
+      })
+      .addMatcher(authApi.endpoints.current.matchPending, (state) => {
+        state.isRefreshing = true;
+      })
+      .addMatcher(authApi.endpoints.current.matchFulfilled, (state, action) => {
+        state.admin = action.payload;
+        state.isLoggedIn = true;
         state.isRefreshing = false;
-      }
-    );
+      })
+      .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
+        state.isRefreshing = false;
+      })
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+        state.admin = {
+          email: null,
+          id: null,
+        };
+        state.token = null;
+        state.isLoggedIn = false;
+      });
   },
 });
 
