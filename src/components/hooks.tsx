@@ -2,7 +2,22 @@ import { useState, useEffect, ChangeEvent } from "react";
 
 import SimpleLightbox from "simplelightbox";
 
-import { UsePaginationLogicProps } from "@/types/types";
+import { FormValues, UsePaginationLogicProps } from "@/types/types";
+import { useLoginMutation } from "@/redux/auth/authAPI";
+
+export const useLoginForm = () => {
+  const [login, { data, isLoading, isError, error }] = useLoginMutation();
+
+  const handleLogin = async (values: FormValues) => {
+    try {
+      await login(values);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
+  return { handleLogin, isLoading, isError, error };
+};
 
 export const useToggleMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);

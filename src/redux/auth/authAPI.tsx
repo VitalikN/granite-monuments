@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import store from "../store"; // Імпортуйте ваше сховище Redux
+import store from "../store";
 import { clearToken } from "./authSlice";
 
 type RootState = ReturnType<typeof store.getState>;

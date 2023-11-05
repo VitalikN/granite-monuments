@@ -33,6 +33,15 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
+      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
+        state.admin = {
+          email: null,
+          id: null,
+        };
+        state.token = null;
+        state.isLoggedIn = false;
+      })
+
       .addMatcher(authApi.endpoints.current.matchPending, (state) => {
         state.isRefreshing = true;
       })
@@ -43,14 +52,6 @@ const authSlice = createSlice({
       })
       .addMatcher(authApi.endpoints.current.matchRejected, (state) => {
         state.isRefreshing = false;
-      })
-      .addMatcher(authApi.endpoints.logout.matchFulfilled, (state) => {
-        state.admin = {
-          email: null,
-          id: null,
-        };
-        state.token = null;
-        state.isLoggedIn = false;
       });
   },
 });

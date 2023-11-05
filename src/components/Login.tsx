@@ -2,19 +2,14 @@
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
-import { ErrorFeedbackProps, FormValues } from "../types/types";
+import { ErrorFeedbackProps } from "../types/types";
 import { validationSchema } from "../types/validationSchemas";
-import { useLoginMutation } from "@/redux/auth/authAPI";
-import { useRouter } from "next/navigation";
 
 import styles from "../sass/layouts/login.module.scss";
-import { useDispatch } from "react-redux";
-import { clearToken } from "../redux/auth/authSlice";
+import { useLoginForm } from "./hooks";
 
 const Login: React.FC = () => {
-  const [login, { data, isLoading, isError, error }] = useLoginMutation();
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const { handleLogin, isLoading, isError, error } = useLoginForm();
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -22,19 +17,6 @@ const Login: React.FC = () => {
         {(errorMessage) => <span className={styles.error}>{errorMessage}</span>}
       </ErrorMessage>
     );
-  };
-  const handleLogin = async (values: FormValues) => {
-    try {
-      const response: any = await login(values);
-      if (response && response.data.token) {
-        // dispatch(clearToken());
-        // dispatch(setToken(response.data.token));
-        console.log("Token dispatch:", response.data.token);
-        // router.push("/monuments-admin");
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-    }
   };
 
   return (

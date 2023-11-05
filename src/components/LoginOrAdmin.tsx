@@ -4,6 +4,7 @@ import { useCurrentQuery } from "@/redux/auth/authAPI";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
 import Login from "./Login";
+import MonumentsCatalog from "@/app/admin/monuments-admin/page";
 
 interface MyErrorType {
   status: number;
@@ -34,7 +35,7 @@ const LoginOrAdmin = () => {
   ) {
     return <Login />;
   } else if (isSuccess && token) {
-    return <div>AdminContent</div>;
+    return <MonumentsCatalog />;
   }
   return null;
 };
