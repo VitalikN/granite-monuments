@@ -1,6 +1,10 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { ErrorFeedbackProps, FormValues } from "@/types/types";
+import {
+  ErrorFeedbackProps,
+  FormValues,
+  ModalPropsUpdate,
+} from "@/types/types";
 
 import styles from "@/sass/layouts/login.module.scss";
 
@@ -9,7 +13,7 @@ import { useUpdateMutation } from "@/redux/auth/authAPI";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
 
-const UpdateForm: React.FC = () => {
+const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
   const email = useSelector(authSelector.getAdminEmail);
   const initialValues = {
     email,
@@ -29,6 +33,7 @@ const UpdateForm: React.FC = () => {
     try {
       console.log(values);
       await update(values);
+      onClose();
     } catch (error) {
       console.error("Login error:", error);
     }

@@ -54,3 +54,12 @@ export interface FormValues {
   email: string;
   password: string;
 }
+
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+}
+export interface ModalPropsUpdate {
+  onClose: () => void;
+}

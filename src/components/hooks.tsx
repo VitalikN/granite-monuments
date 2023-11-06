@@ -1,9 +1,31 @@
-import { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent, RefObject } from "react";
 
 import SimpleLightbox from "simplelightbox";
 
 import { FormValues, UsePaginationLogicProps } from "@/types/types";
 import { useLoginMutation } from "@/redux/auth/authAPI";
+
+export const useClickOutside = (
+  ref: RefObject<HTMLDivElement>,
+  isOpen: boolean,
+  onClose: () => void
+) => {
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, ref, onClose]);
+};
 
 export const useLoginForm = () => {
   const [login, { data, isLoading, isError, error }] = useLoginMutation();
