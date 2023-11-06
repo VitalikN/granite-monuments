@@ -2,11 +2,10 @@
 
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
-import { ErrorFeedbackProps } from "../types/types";
-import { validationSchema } from "../types/validationSchemas";
-
-import styles from "../sass/layouts/login.module.scss";
-import { useLoginForm } from "./hooks";
+import styles from "@/sass/layouts/login.module.scss";
+import { useLoginForm } from "../hooks";
+import { ErrorFeedbackProps } from "@/types/types";
+import { validationSchema } from "@/types/validationSchemas";
 
 const Login: React.FC = () => {
   const { handleLogin, isLoading, isError, error } = useLoginForm();

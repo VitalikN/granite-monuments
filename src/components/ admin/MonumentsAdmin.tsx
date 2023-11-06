@@ -2,6 +2,7 @@
 
 import { FiLogOut } from "react-icons/fi";
 import { useLogoutMutation } from "@/redux/auth/authAPI";
+import UpdateForm from "./UpdateForm";
 
 const MonumentsAdmin = () => {
   const [logout] = useLogoutMutation();
@@ -17,6 +18,7 @@ const MonumentsAdmin = () => {
     <section>
       MonumentsAdmin
       <FiLogOut onClick={handleLogout} />
+      <UpdateForm />
     </section>
   );
 };

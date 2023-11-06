@@ -1,9 +1,13 @@
 // import MonumentsAdmin from "@/components/MonumentsAdmin";
-import PrivateRoute from "@/components/PrivateRoute";
+import AdminSidebar from "@/components/ admin/AdminSidebar";
+import PrivateRoute from "@/components/ admin/PrivateRoute";
 
 import dynamic from "next/dynamic";
 
-const MonumentsAdmin = dynamic(() => import("@/components/MonumentsAdmin"), {});
+const MonumentsAdmin = dynamic(
+  () => import("@/components/ admin/MonumentsAdmin"),
+  {}
+);
 
 const MonumentsCatalog = () => {
   return (

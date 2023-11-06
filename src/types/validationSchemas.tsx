@@ -6,3 +6,10 @@ export const validationSchema = Yup.object().shape({
     .min(6, "Пароль повинен мати щонайменше 6 символів!")
     .required("Обов'язкове поле!"),
 });
+
+export const validationSchemaUpdate = Yup.object().shape({
+  email: Yup.string(),
+  password: Yup.string()
+    .min(6, "Пароль повинен мати щонайменше 6 символів!")
+    .required("Обов'язкове поле!"),
+});
