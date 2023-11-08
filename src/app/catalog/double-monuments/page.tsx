@@ -1,4 +1,4 @@
-import DoubleMonumentsList from "@/components/DoubleMonumentsList";
+import DoubleMonumentsList from "@/components/product/DoubleMonumentsList";
 
 export const metadata = {
   title: "Подвійні пам`ятники",

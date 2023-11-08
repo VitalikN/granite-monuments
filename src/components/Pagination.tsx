@@ -1,20 +1,20 @@
-import { useState, FC } from "react";
+import { FC } from "react";
 
 import styles from "../sass/layouts/pagination.module.scss";
 import { PaginationProps } from "@/types/types";
-import { usePaginationLogic } from "./hooks";
 
 export const Pagination: FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
   onPageChange,
-  initialPage = 1,
+  currentPage,
 }) => {
-  const { currentPage, totalPages, handlePageChange } = usePaginationLogic({
-    totalItems,
-    itemsPerPage,
-    initialPage,
-  });
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageChange = (page: number) => {
+    onPageChange(page);
+  };
+
   if (totalPages <= 1) {
     return null;
   }

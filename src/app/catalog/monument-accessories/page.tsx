@@ -1,4 +1,4 @@
-import MonumentAccessoriesList from "@/components/MonumentAccessoriesList";
+import MonumentAccessoriesList from "@/components/product/MonumentAccessoriesList";
 
 export const metadata = {
   title: "Аксесуари до пам`ятника",

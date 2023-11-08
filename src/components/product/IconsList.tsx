@@ -3,6 +3,6 @@
 import MonumentsList from "./MonumentsList";
 
 const IconsList: React.FC = () => {
-  return <MonumentsList monumentsData={[]} title="Ікони до пам`ятників" />;
+  return <MonumentsList category="icons" title="Ікони до пам`ятників" />;
 };
 export default IconsList;

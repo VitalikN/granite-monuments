@@ -1,49 +1,35 @@
-// import { useEffect } from "react";
 import Image from "next/image";
 
-// import SimpleLightbox from "simplelightbox";
-// import "simplelightbox/dist/simple-lightbox.min.css";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 import styles from "../sass/layouts/imageList.module.scss";
-import { ImageListProps } from "@/types/types";
+import { ImageListProps, ImageProps } from "@/types/types";
 import { useSimpleLightbox } from "./hooks";
 
-export const ImageList: React.FC<ImageListProps> = ({
-  images,
-  handleImagesPerPageChange,
-  imagesPerPage,
-}) => {
-  useSimpleLightbox(images);
+export const ImageList: React.FC<ImageListProps> = ({ data }) => {
+  useSimpleLightbox(data);
 
   return (
     <>
-      <label className={styles.single__label}>
-        Кількість зображень на сторінці:
-        <select
-          className={styles.single__select}
-          value={imagesPerPage}
-          onChange={handleImagesPerPageChange}
-        >
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-        </select>
-      </label>
       <ul className={styles.single__list}>
-        {images.map((img) => (
-          <li className={styles.single__item} key={img.id}>
-            <a href={img.path}>
+        {data &&
+          data.map(({ _id, url, title, price }: ImageProps) => (
+            <li className={styles.single__item} key={_id}>
               <Image
                 className={styles.single__img}
-                src={img.path}
+                src={url}
                 alt="catalog/monument-accessories"
-                width="300"
-                height="400"
+                width="200"
+                height="300"
                 priority={true}
               />
-            </a>
-          </li>
-        ))}
+              <div className={styles.single__list__box}>
+                <p>{title}</p>
+                <p className={styles.single__list__box__price}>ціна:{price}</p>
+              </div>
+            </li>
+          ))}
       </ul>
     </>
   );

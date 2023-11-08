@@ -81,38 +81,38 @@ export const useSimpleLightbox = (images: any[]) => {
   }, [images]);
 };
 
-export const usePagination = (
-  initialItemsPerPage: number,
-  initialPage: number = 1
-) => {
-  const [itemsPerPage, setItemsPerPage] = useState<number>(initialItemsPerPage);
-  const [currentPage, setCurrentPage] = useState<number>(initialPage);
+// export const usePagination = (
+//   initialItemsPerPage: number,
+//   initialPage: number = 1
+// ) => {
+//   const [itemsPerPage, setItemsPerPage] = useState<number>(initialItemsPerPage);
+//   const [currentPage, setCurrentPage] = useState<number>(initialPage);
 
-  const handleItemsPerPageChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1);
-  };
+//   const handleItemsPerPageChange = (event: ChangeEvent<HTMLSelectElement>) => {
+//     setItemsPerPage(Number(event.target.value));
+//     setCurrentPage(1);
+//   };
 
-  return {
-    itemsPerPage,
-    currentPage,
-    setItemsPerPage,
-    setCurrentPage,
-    handleItemsPerPageChange,
-  };
-};
+//   return {
+//     itemsPerPage,
+//     currentPage,
+//     setItemsPerPage,
+//     setCurrentPage,
+//     handleItemsPerPageChange,
+//   };
+// };
 
-export const usePaginationLogic = ({
-  totalItems,
-  itemsPerPage,
-  initialPage = 1,
-}: UsePaginationLogicProps) => {
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+// export const usePaginationLogic = ({
+//   totalItems,
+//   itemsPerPage,
+//   initialPage = 1,
+// }: UsePaginationLogicProps) => {
+//   const [currentPage, setCurrentPage] = useState(initialPage);
+//   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+//   const handlePageChange = (page: number) => {
+//     setCurrentPage(page);
+//   };
 
-  return { currentPage, totalPages, handlePageChange };
-};
+//   return { currentPage, totalPages, handlePageChange };
+// };

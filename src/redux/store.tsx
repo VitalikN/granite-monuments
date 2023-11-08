@@ -11,18 +11,20 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import { monumentsApi } from "./monuments/monumentsApi";
 
 const store = configureStore({
   reducer: {
     auth: persisteAuthReducer,
     [authApi.reducerPath]: authApi.reducer,
+    [monumentsApi.reducerPath]: monumentsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authApi.middleware),
+    }).concat(authApi.middleware, monumentsApi.middleware),
 });
 
 export const persistor = persistStore(store);

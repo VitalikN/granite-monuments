@@ -1,98 +1,52 @@
 @import "../utils/container.module";
 
-.single__section {
-  background-color: #fbf7f0;
-
-  padding: 0 0 5em 0;
-}
-
-.single__title {
-  font-family: "Playfair Display", Sans-serif;
-  font-size: 2em;
-  font-weight: 400;
-  line-height: 1.2em;
-  letter-spacing: 0px;
-
-  background: #bd976e;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  transition: color 0.5s;
-  text-align: center;
-}
 .single__list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   padding-top: 3em;
 }
 .single__item {
-  border: 1px solid #bd976e;
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 20px;
   width: 342px;
+  transition: all 0.5s;
+  @media screen and (max-width: 350px) {
+    width: 270px;
+  }
+  &:hover,
+  &:focus {
+    scale: 1.07;
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+      0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    background: #fbf7f0;
+    color: #29170c;
+    outline: none;
+  }
 }
 .single__img {
   cursor: pointer;
+  border-radius: 20px 20px 0 0;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
-.single__label {
-  font-family: "Playfair Display", Sans-serif;
+
+.single__list__box {
+  margin-top: auto;
+  padding: 20px;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.2em;
 
-  background: #bd976e;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  transition: color 0.5s;
-  padding-top: 1em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.single__select {
-  cursor: pointer;
-  margin-left: 7px;
-  border: 2px solid #bd976e;
   color: #bd976e;
-  font-family: "Playfair Display", Sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.2em;
-  &:focus,
-  &:hover {
-    border: 2px solid #bd976e;
-    color: #bd976e;
-  }
 }
-/*
-
-technical__works
-
-
-**/
-.technical__section {
-  background-color: #fbf7f0;
+.single__list__box__price {
+  font-size: 20px;
+  font-weight: 500;
+  padding-top: 10px;
 }
-.technical__works {
-  font-family: "Playfair Display", Sans-serif;
-  font-size: 1.5rem;
-  font-weight: 400;
-  line-height: 1.2em;
-
-  background: #bd976e;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  transition: color 0.5s;
-  text-align: center;
-
-  padding: 1.5em;
-}
-.technical__works__img {
-  width: 100%;
-  height: 100%;
-}
+/***/

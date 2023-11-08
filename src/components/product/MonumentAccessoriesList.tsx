@@ -3,6 +3,8 @@
 import MonumentsList from "./MonumentsList";
 
 const MonumentAccessoriesList: React.FC = () => {
-  return <MonumentsList monumentsData={[]} title="Аксесуари до пам`ятників" />;
+  return (
+    <MonumentsList category="accessories" title="Аксесуари до пам`ятників" />
+  );
 };
 export default MonumentAccessoriesList;

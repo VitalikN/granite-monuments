@@ -1,4 +1,4 @@
-import SingleMonumentsList from "@/components/SingleMonumentsList";
+import SingleMonumentsList from "@/components/product/SingleMonumentsList";
 
 export const metadata = {
   title: "Одинарні пам`ятники",

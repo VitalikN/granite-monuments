@@ -1,4 +1,4 @@
-import IconsList from "@/components/IconsList";
+import IconsList from "@/components/product/IconsList";
 
 export const metadata = {
   title: "Ікони до пам`ятника",
