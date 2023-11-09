@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface UsePaginationLogicProps {
   totalItems: number;
@@ -13,22 +13,15 @@ export interface PaginationProps {
   currentPage: number;
 }
 
-// export interface ImageProps {
-//   id: number;
-//   path: string;
-// }
-
 export interface ImageListProps {
   data: any;
-  handleImagesPerPageChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-  imagesPerPage: number;
+  deleteProduct?: (productId: string) => void; // Додайте цей рядок
 }
 
 export interface MonumentsListProps {
   category: string;
 
   title: string;
-  // subtitle: "open" | "closed";
 }
 
 export interface CatalogLayoutProps {

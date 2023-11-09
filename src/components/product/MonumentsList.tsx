@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Pagination } from "../Pagination";
 import { ImageList } from "../ImageList";
 import Image from "next/image";
@@ -12,10 +12,6 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const handleItemsPerPageChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setItemsPerPage(Number(event.target.value));
-    setCurrentPage(1);
-  };
   const { data, error, isLoading } = useGetAllMonumentsQuery({
     page: currentPage,
     limit: itemsPerPage,
@@ -30,7 +26,6 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
   };
 
   if (isLoading) {
-    // Якщо дані ще завантажуються, відображаємо індікатор завантаження або інший візуальний ефект.
     return <div>Loading...</div>;
   }
 
@@ -72,11 +67,7 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
           <option value="closed">Закриті</option>
         </select>
 
-        <ImageList
-          data={data.data}
-          handleImagesPerPageChange={handleItemsPerPageChange}
-          imagesPerPage={itemsPerPage}
-        />
+        <ImageList data={data.data} />
 
         <Pagination
           totalItems={data.total}

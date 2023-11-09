@@ -6,9 +6,16 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 import styles from "../sass/layouts/imageList.module.scss";
 import { ImageListProps, ImageProps } from "@/types/types";
 import { useSimpleLightbox } from "./hooks";
+import { useSelector } from "react-redux";
+import authSelector from "@/redux/auth/authSelector";
+import { MdOutlineDeleteForever } from "react-icons/md";
 
-export const ImageList: React.FC<ImageListProps> = ({ data }) => {
+export const ImageList: React.FC<ImageListProps> = ({
+  data,
+  deleteProduct,
+}) => {
   useSimpleLightbox(data);
+  const isAdmin = useSelector(authSelector.getAdminEmail);
 
   return (
     <>
@@ -26,7 +33,17 @@ export const ImageList: React.FC<ImageListProps> = ({ data }) => {
               />
               <div className={styles.single__list__box}>
                 <p>{title}</p>
-                <p className={styles.single__list__box__price}>ціна:{price}</p>
+                <div className={styles.single__list__box__icon}>
+                  <p className={styles.single__list__box__price}>
+                    ціна:{price}
+                  </p>
+                  {isAdmin && deleteProduct && (
+                    <MdOutlineDeleteForever
+                      className={styles.single__icon}
+                      onClick={() => deleteProduct(_id)}
+                    />
+                  )}
+                </div>
               </div>
             </li>
           ))}

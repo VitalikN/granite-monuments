@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 
 const LoginOrAdmin = dynamic(
-  () => import("@/components/ admin/LoginOrAdmin"),
+  () => import("@/components/admin/LoginOrAdmin"),
   {}
 );
 

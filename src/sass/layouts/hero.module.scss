@@ -2,57 +2,30 @@
 @import "../utils/container.module";
 
 .section {
-  @include mobile {
-    height: 250px;
-    width: 100vw;
-    background-image: linear-gradient(
-        rgba(41, 23, 12, 0.4),
-        rgba(31, 23, 12, 0.4)
-      ),
-      url("/Angel.jpg");
+  background-image: linear-gradient(
+      rgba(41, 23, 12, 0.4),
+      rgba(31, 23, 12, 0.4)
+    ),
+    url("/Angel.jpg");
 
-    background-position: bottom;
-    background-size: cover;
-    background-repeat: no-repeat;
-  }
-  @media screen and (min-width: 550px) {
-    height: 330px;
-  }
-  @media screen and (min-width: 650px) {
-    height: 400px;
-  }
-  @include tablet {
-    height: 450px;
-  }
-  @media screen and (min-width: 900px) {
-    height: 530px;
-  }
-  @media screen and (min-width: 1050px) {
-    height: 630px;
-  }
-  @include desktop {
-    height: 750px;
-  }
-  @media screen and (min-width: 1680px) {
-    height: 100vh;
-  }
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .title {
-  @include mobile {
-    background: linear-gradient(90deg, #bd976e, #ffffff, #bd976e);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    transition: color 0.5s;
+  background: linear-gradient(90deg, #bd976e, #ffffff, #bd976e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: color 0.5s;
 
-    font-family: "Playfair Display", Sans-serif;
-    font-size: 1.8em;
-    font-weight: 600;
-    line-height: 1.2em;
-    letter-spacing: 0px;
-    text-align: center;
-    padding-top: 10px;
-  }
+  font-family: "Playfair Display", Sans-serif;
+  font-size: 1.8em;
+  font-weight: 600;
+  line-height: 1.2em;
+  letter-spacing: 0px;
+  text-align: center;
+  padding-top: 10px;
   @include tablet {
     margin-left: auto;
     padding-top: 50px;
@@ -67,26 +40,24 @@
   }
 }
 .text {
-  @include mobile {
-    background: linear-gradient(90deg, #bd976e, #ffffff, #bd976e);
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    transition: color 0.5s;
+  background: linear-gradient(90deg, #bd976e, #ffffff, #bd976e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: color 0.5s;
 
-    display: block;
-    // color: #ffffff;
-    font-family: "Montserrat", Sans-serif;
+  display: block;
+  // color: #ffffff;
+  font-family: "Montserrat", Sans-serif;
 
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 1.25em;
-    letter-spacing: 2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.25em;
+  letter-spacing: 2px;
 
-    font-size: 0.8em;
-    padding-top: 10px;
-    text-align: center;
-  }
+  font-size: 0.8em;
+  padding-top: 10px;
+  text-align: center;
   @include tablet {
     margin-left: auto;
     width: 300px;

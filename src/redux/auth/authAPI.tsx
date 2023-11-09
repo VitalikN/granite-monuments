@@ -9,8 +9,8 @@ export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
     //
-    // baseUrl: "https://monuments-backend.onrender.com/api/admin",
-    baseUrl: "http://localhost:3001/api/admin",
+    baseUrl: "https://monuments-backend.onrender.com/api/admin",
+    // baseUrl: "http://localhost:3001/api/admin",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;
       if (token) {
@@ -36,6 +36,7 @@ export const authApi = createApi({
         method: "PUT",
         body: updates,
       }),
+      invalidatesTags: ["auth"],
     }),
 
     logout: builder.mutation({

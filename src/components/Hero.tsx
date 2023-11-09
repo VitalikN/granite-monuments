@@ -1,8 +1,15 @@
+"use client";
 import styles from "../sass/layouts/hero.module.scss";
+import { useDynamicHeight } from "./hooks";
 
 const Hero: React.FC = () => {
+  const dynamicHeight = useDynamicHeight();
+
   return (
-    <section className={styles.section}>
+    <section
+      className={styles.section}
+      style={{ height: `${dynamicHeight}px` }}
+    >
       <div className={styles.container}>
         <h1 className={styles.title}>Гранітні пам`ятники</h1>
         <p className={styles.text}>ВИРОБНИЦТВО. ПРОЕКТУВАННЯ. МОНТАЖ</p>

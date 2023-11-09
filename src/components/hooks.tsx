@@ -1,9 +1,74 @@
-import { useState, useEffect, ChangeEvent, RefObject } from "react";
+import { useState, useEffect, RefObject } from "react";
 
 import SimpleLightbox from "simplelightbox";
 
-import { FormValues, UsePaginationLogicProps } from "@/types/types";
-import { useLoginMutation } from "@/redux/auth/authAPI";
+import { FormValues } from "@/types/types";
+import { useCurrentQuery, useLoginMutation } from "@/redux/auth/authAPI";
+import { useSelector } from "react-redux";
+import authSelector from "@/redux/auth/authSelector";
+
+interface AuthResult {
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+interface MyErrorType {
+  status: number;
+  data: { message: string };
+}
+
+export const useAuth = (): AuthResult => {
+  const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
+
+  const {
+    data: token,
+    error,
+    isSuccess,
+    isLoading,
+  } = useCurrentQuery({
+    skip: !isLoggedIn,
+    refetchOnMount: true,
+  });
+
+  return {
+    isLoggedIn,
+    isLoading,
+    isError: !!(
+      error &&
+      (error as MyErrorType).status === 401 &&
+      (error as MyErrorType).data.message === "Not authorized"
+    ),
+  };
+};
+
+export const useDynamicHeight = () => {
+  const [dynamicHeight, setDynamicHeight] = useState(420);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const w = Math.min(window.innerWidth, 2560);
+
+      const w1 = 768,
+        h1 = 420;
+      const w2 = 2560,
+        h2 = 1400;
+
+      const calculatedHeight = h1 + ((w - w1) * (h2 - h1)) / (w2 - w1);
+      setDynamicHeight(calculatedHeight);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return dynamicHeight;
+};
 
 export const useClickOutside = (
   ref: RefObject<HTMLDivElement>,
@@ -80,39 +145,3 @@ export const useSimpleLightbox = (images: any[]) => {
     };
   }, [images]);
 };
-
-// export const usePagination = (
-//   initialItemsPerPage: number,
-//   initialPage: number = 1
-// ) => {
-//   const [itemsPerPage, setItemsPerPage] = useState<number>(initialItemsPerPage);
-//   const [currentPage, setCurrentPage] = useState<number>(initialPage);
-
-//   const handleItemsPerPageChange = (event: ChangeEvent<HTMLSelectElement>) => {
-//     setItemsPerPage(Number(event.target.value));
-//     setCurrentPage(1);
-//   };
-
-//   return {
-//     itemsPerPage,
-//     currentPage,
-//     setItemsPerPage,
-//     setCurrentPage,
-//     handleItemsPerPageChange,
-//   };
-// };
-
-// export const usePaginationLogic = ({
-//   totalItems,
-//   itemsPerPage,
-//   initialPage = 1,
-// }: UsePaginationLogicProps) => {
-//   const [currentPage, setCurrentPage] = useState(initialPage);
-//   const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-//   const handlePageChange = (page: number) => {
-//     setCurrentPage(page);
-//   };
-
-//   return { currentPage, totalPages, handlePageChange };
-// };

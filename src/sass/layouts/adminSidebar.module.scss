@@ -1,0 +1,67 @@
+@import "../utils/mixins.module";
+@import "../utils/container.module";
+
+.admin__list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  width: 250px;
+  border: 1px solid #bd976e;
+  border-radius: 10px;
+  max-height: 250px;
+  @include tablet {
+    margin-top: 150px;
+  }
+}
+.admin__link {
+  display: flex;
+  flex-direction: column;
+
+  transition: all 0.5s ease;
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.admin__item {
+  font-family: "Playfair Display", Sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.4em;
+  padding: 10px 20px;
+  color: #bd976e;
+  border-bottom: 1px solid #bd976e;
+  width: 100%;
+  &:last-child {
+    border-bottom: none;
+  }
+}
+.admin__box__icon {
+  display: flex;
+
+  gap: 40px;
+  justify-content: center;
+  width: 250px;
+  padding: 20px;
+}
+.admin__box__text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Playfair Display", Sans-serif;
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.4em;
+  color: #bd976e;
+}
+.admin__icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: #bd976e;
+  transition: all 0.5s ease;
+
+  &:hover {
+    scale: 1.3;
+  }
+}

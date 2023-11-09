@@ -47,6 +47,21 @@
 .single__list__box__price {
   font-size: 20px;
   font-weight: 500;
-  padding-top: 10px;
 }
-/***/
+/** admin*/
+.single__list__box__icon {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+}
+.single__icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: #bd976e;
+  transition: all 0.5s ease;
+
+  &:hover {
+    scale: 1.3;
+  }
+}
