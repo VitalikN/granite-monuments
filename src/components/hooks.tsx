@@ -68,15 +68,15 @@ export const useAuth = (): AuthResult => {
   };
 };
 
-export const useDynamicHeight = () => {
-  const [dynamicHeight, setDynamicHeight] = useState(420);
+export const useDynamicHeight = (initialWidth = 768, initialHeight = 420) => {
+  const [dynamicHeight, setDynamicHeight] = useState(initialHeight);
 
   useEffect(() => {
     const handleResize = () => {
       const w = Math.min(window.innerWidth, 2560);
 
-      const w1 = 768,
-        h1 = 420;
+      const w1 = initialWidth,
+        h1 = initialHeight;
       const w2 = 2560,
         h2 = 1400;
 
@@ -91,7 +91,7 @@ export const useDynamicHeight = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [initialHeight, initialWidth]);
 
   return dynamicHeight;
 };

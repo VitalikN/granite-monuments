@@ -3,7 +3,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import styles from "@/sass/layouts/login.module.scss";
-import { useLogin } from "../hooks";
+import { useDynamicHeight, useLogin } from "../hooks";
 import { ErrorFeedbackProps } from "@/types/types";
 import { validationSchema } from "@/types/validationSchemas";
 
@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Login: React.FC = () => {
   const { isLoading, isError, handleSubmit } = useLogin();
+  const dynamicHeight = useDynamicHeight(320, 320);
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -20,40 +21,15 @@ const Login: React.FC = () => {
       </ErrorMessage>
     );
   };
-
-  // const handleLoginError = () => {
-  //   toast.error("Invalid email or password. Please try again.", {
-  //     position: "top-right",
-  //     autoClose: 3000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //   });
-  // };
-  // const handleSubmit = async (values, { resetForm }) => {
-  //   const success = await handleLogin(values);
-  //   resetForm();
-  //   if (!success) {
-  //     handleLoginError();
-  //   }
-  // };
-
   return (
-    <section className={styles.section__login}>
+    <section
+      className={styles.section__login}
+      style={{ height: `${dynamicHeight}px` }}
+    >
       <div className={`${styles.container} ${styles.login__container__form}`}>
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={handleSubmit}
-          // onSubmit={async (values, { resetForm }) => {
-          //   const success = await handleLogin(values);
-          //   resetForm();
-          //   if (!success) {
-          //     handleLoginError();
-          //   }
-          // }}
           validationSchema={validationSchema}
         >
           {({ errors, touched }) => (

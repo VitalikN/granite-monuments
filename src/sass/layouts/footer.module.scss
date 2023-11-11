@@ -3,7 +3,7 @@
 
 .footer__section {
   padding: 4em 0em 5em 0em;
-
+  border: none;
   &.home {
     background-image: linear-gradient(
         rgba(41, 23, 12, 0.6),
@@ -16,16 +16,14 @@
   }
 
   &.other {
+    border: none;
+
     background-color: #29170c;
-    border-style: solid;
-    border-width: 1px 0px 0px 0px;
-    border-color: #ffffff;
-    transition: background 0.3s, border 0.3s, border-radius 0.3s,
-      box-shadow 0.3s;
   }
 }
 
 .footer__container {
+  border: none;
   @include tablet {
     display: flex;
     justify-content: space-around;

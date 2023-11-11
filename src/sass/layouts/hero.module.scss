@@ -11,6 +11,7 @@
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
+  border: none;
 }
 .title {
   background: linear-gradient(90deg, #bd976e, #ffffff, #bd976e);
@@ -47,7 +48,6 @@
   transition: color 0.5s;
 
   display: block;
-  // color: #ffffff;
   font-family: "Montserrat", Sans-serif;
 
   font-weight: 600;
