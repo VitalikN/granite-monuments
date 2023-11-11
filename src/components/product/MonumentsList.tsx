@@ -29,7 +29,7 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
     return <div>Loading...</div>;
   }
 
-  if (error || data.total === 0) {
+  if (error && data.total === 0) {
     return (
       <section className={styles.technical__section}>
         <h2 className={styles.single__title}>{title}</h2>
