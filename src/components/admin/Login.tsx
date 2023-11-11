@@ -3,12 +3,15 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 
 import styles from "@/sass/layouts/login.module.scss";
-import { useLoginForm } from "../hooks";
+import { useLogin } from "../hooks";
 import { ErrorFeedbackProps } from "@/types/types";
 import { validationSchema } from "@/types/validationSchemas";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Login: React.FC = () => {
-  const { handleLogin, isLoading, isError, error } = useLoginForm();
+  const { isLoading, isError, handleSubmit } = useLogin();
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -18,15 +21,39 @@ const Login: React.FC = () => {
     );
   };
 
+  // const handleLoginError = () => {
+  //   toast.error("Invalid email or password. Please try again.", {
+  //     position: "top-right",
+  //     autoClose: 3000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //   });
+  // };
+  // const handleSubmit = async (values, { resetForm }) => {
+  //   const success = await handleLogin(values);
+  //   resetForm();
+  //   if (!success) {
+  //     handleLoginError();
+  //   }
+  // };
+
   return (
     <section className={styles.section__login}>
       <div className={`${styles.container} ${styles.login__container__form}`}>
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values, { resetForm }) => {
-            handleLogin(values);
-            resetForm();
-          }}
+          onSubmit={handleSubmit}
+          // onSubmit={async (values, { resetForm }) => {
+          //   const success = await handleLogin(values);
+          //   resetForm();
+          //   if (!success) {
+          //     handleLoginError();
+          //   }
+          // }}
           validationSchema={validationSchema}
         >
           {({ errors, touched }) => (
@@ -56,10 +83,17 @@ const Login: React.FC = () => {
 
                 <ErrorFeedback name="password" />
               </div>
-
               <button className={styles.styledBtn} type="submit">
-                Sign in
+                {isLoading ? "Loading...." : "Sign in"}
               </button>
+              {isError && (
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  closeOnClick
+                  theme="light"
+                />
+              )}
             </Form>
           )}
         </Formik>

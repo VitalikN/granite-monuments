@@ -1,5 +1,16 @@
 import { ReactNode } from "react";
 
+export interface AuthResult {
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export interface MyErrorType {
+  status: number;
+  data: { message: string };
+}
+
 export interface UsePaginationLogicProps {
   totalItems: number;
   itemsPerPage: number;

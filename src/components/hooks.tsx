@@ -2,21 +2,47 @@ import { useState, useEffect, RefObject } from "react";
 
 import SimpleLightbox from "simplelightbox";
 
-import { FormValues } from "@/types/types";
+import { AuthResult, FormValues, MyErrorType } from "@/types/types";
 import { useCurrentQuery, useLoginMutation } from "@/redux/auth/authAPI";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
+import { toast } from "react-toastify";
 
-interface AuthResult {
-  isLoggedIn: boolean;
-  isLoading: boolean;
-  isError: boolean;
-}
+export const useLogin = () => {
+  const [login, { isLoading, isError, error }] = useLoginMutation();
 
-interface MyErrorType {
-  status: number;
-  data: { message: string };
-}
+  const handleLogin = async (values: FormValues) => {
+    try {
+      await login(values);
+    } catch (error) {
+      console.error("Login error:", error);
+    }
+  };
+
+  const handleLoginError = () => {
+    toast.error("Invalid email or password. Please try again.", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  const handleSubmit = async (
+    values: FormValues,
+    { resetForm }: { resetForm: () => void }
+  ) => {
+    await handleLogin(values);
+    resetForm();
+    handleLoginError();
+  };
+
+  return { isLoading, isError, error, handleSubmit };
+};
 
 export const useAuth = (): AuthResult => {
   const isLoggedIn = useSelector(authSelector.getIsLoggedIn);
@@ -90,20 +116,6 @@ export const useClickOutside = (
       window.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isOpen, ref, onClose]);
-};
-
-export const useLoginForm = () => {
-  const [login, { data, isLoading, isError, error }] = useLoginMutation();
-
-  const handleLogin = async (values: FormValues) => {
-    try {
-      await login(values);
-    } catch (error) {
-      console.error("Login error:", error);
-    }
-  };
-
-  return { handleLogin, isLoading, isError, error };
 };
 
 export const useToggleMenu = () => {
