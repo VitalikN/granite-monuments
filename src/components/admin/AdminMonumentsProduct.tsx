@@ -1,7 +1,6 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Pagination } from "../Pagination";
 import { ImageList } from "../ImageList";
-import Image from "next/image";
 
 import styles from "../../sass/layouts/monumentsList.module.scss";
 import { MonumentsListProps } from "@/types/types";
@@ -9,6 +8,7 @@ import {
   useDeleteMonumentMutation,
   useGetAllMonumentsProductQuery,
 } from "@/redux/adminMonumentsApi/adminMonumentsApi";
+import TechnicalWorks from "../product/TechnicalWorks";
 
 const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");
@@ -44,26 +44,27 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  if (error || data.total === 0) return <TechnicalWorks title={title} />;
 
-  if (error || data.total === 0) {
-    return (
-      <section className={styles.technical__section}>
-        <h2 className={styles.single__title}>{title}</h2>
-        <p className={styles.technical__works}>
-          Ведуться технічні роботи. Перепрошуємо за незручності.
-        </p>
+  // if (error || data.total === 0) {
+  //   return (
+  //     <section className={styles.technical__section}>
+  //       <h2 className={styles.single__title}>{title}</h2>
+  //       <p className={styles.technical__works}>
+  //         Ведуться технічні роботи. Перепрошуємо за незручності.
+  //       </p>
 
-        <Image
-          className={styles.technical__works__img}
-          src={"/developer.jpeg"}
-          alt="developer"
-          width="600"
-          height="400"
-          priority={true}
-        />
-      </section>
-    );
-  }
+  //       <Image
+  //         className={styles.technical__works__img}
+  //         src={"/developer.jpeg"}
+  //         alt="developer"
+  //         width="600"
+  //         height="400"
+  //         priority={true}
+  //       />
+  //     </section>
+  //   );
+  // }
 
   return (
     <div>

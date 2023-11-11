@@ -19,9 +19,9 @@ export const ImageList: React.FC<ImageListProps> = ({
 
   return (
     <>
-      <ul className={styles.single__list}>
-        {data &&
-          data.map(({ _id, url, title, price }: ImageProps) => (
+      {data && (
+        <ul className={styles.single__list}>
+          {data.map(({ _id, url, title, price }: ImageProps) => (
             <li className={styles.single__item} key={_id}>
               <Image
                 className={styles.single__img}
@@ -47,7 +47,8 @@ export const ImageList: React.FC<ImageListProps> = ({
               </div>
             </li>
           ))}
-      </ul>
+        </ul>
+      )}
     </>
   );
 };

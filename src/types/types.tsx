@@ -30,7 +30,7 @@ export interface ImageListProps {
 }
 
 export interface MonumentsListProps {
-  category: string;
+  category?: string;
 
   title: string;
 }
