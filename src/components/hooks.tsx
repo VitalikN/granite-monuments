@@ -9,8 +9,7 @@ import authSelector from "@/redux/auth/authSelector";
 import { toast } from "react-toastify";
 
 import { useAddMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
-
-export const useAdminAddProduct = () => {
+export const useAdminAddProduct = (onClose: () => void) => {
   const [selectedImg, setSelectedImg] = useState<File | null>(null);
   const [errorByImg, setErrorByImg] = useState("none");
 
@@ -42,8 +41,8 @@ export const useAdminAddProduct = () => {
 
     try {
       await add(formData);
-      console.log(values);
       toast.success(`Новий товар додано`);
+      onClose();
     } catch (error) {
       return toast.error("error");
     }

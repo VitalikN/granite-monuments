@@ -2,17 +2,17 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import styles from "@/sass/layouts/login.module.scss";
 import { addSchema } from "@/types/validationSchemas";
 import { ToastContainer } from "react-toastify";
-import { ErrorFeedbackProps } from "@/types/types";
+import { ErrorFeedbackProps, ModalPropsUpdate } from "@/types/types";
 import { useAdminAddProduct } from "../hooks";
 
-const AdminAddProduct = () => {
+const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
   const {
     errorByImg,
     fileInputRef,
     selectedFileName,
     handleOnChange,
     handleSubmit,
-  } = useAdminAddProduct();
+  } = useAdminAddProduct(onClose);
 
   const initialValues = {
     title: "",

@@ -34,7 +34,7 @@ const AdminSidebar = () => {
       case "update":
         return <UpdateForm onClose={() => setMenuOpen(false)} />;
       case "addProduct":
-        return <AdminAddProduct />;
+        return <AdminAddProduct onClose={() => setMenuOpen(false)} />;
       default:
         return null;
     }
