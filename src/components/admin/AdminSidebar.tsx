@@ -8,10 +8,13 @@ import { useLogoutMutation } from "@/redux/auth/authAPI";
 import UpdateForm from "./UpdateForm";
 import Modal from "./Modal";
 import { MdOutlineCreate } from "react-icons/md";
+import AdminAddProduct from "./AdminAddProduct";
+import { useState } from "react";
 
 const AdminSidebar = () => {
   const [logout] = useLogoutMutation();
   const { menuOpen, setMenuOpen } = useToggleMenu();
+  const [selectedForm, setSelectedForm] = useState<string | null>(null);
 
   const handleLogout = async () => {
     try {
@@ -21,9 +24,33 @@ const AdminSidebar = () => {
     }
   };
 
+  const openForm = (form: string) => {
+    setSelectedForm(form);
+    setMenuOpen(true);
+  };
+
+  const renderSelectedForm = () => {
+    switch (selectedForm) {
+      case "update":
+        return <UpdateForm onClose={() => setMenuOpen(false)} />;
+      case "addProduct":
+        return <AdminAddProduct />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       <ul className={styles.admin__list}>
+        <li className={styles.admin__item}>
+          <h3
+            className={styles.admin__text}
+            onClick={() => openForm("addProduct")}
+          >
+            Додати пам`ятник
+          </h3>
+        </li>
         <li className={styles.admin__item}>
           <Link href="/admin/admin-single" className={styles.admin__link}>
             <h3 className={styles.admin__text}> Одинарні </h3>
@@ -50,14 +77,16 @@ const AdminSidebar = () => {
           Профіль
           <MdOutlineCreate
             className={styles.admin__icon}
-            onClick={() => setMenuOpen(true)}
+            onClick={() => openForm("update")}
           />
         </h3>
-
-        <FiLogOut className={styles.admin__icon} onClick={handleLogout} />
+        <h3 className={styles.admin__box__text}>
+          Вихід{" "}
+          <FiLogOut className={styles.admin__icon} onClick={handleLogout} />
+        </h3>
       </div>
       <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
-        <UpdateForm onClose={() => setMenuOpen(false)} />
+        {renderSelectedForm()}
       </Modal>
     </div>
   );

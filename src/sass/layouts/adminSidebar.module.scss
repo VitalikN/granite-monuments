@@ -9,7 +9,6 @@
   width: 250px;
   border: 1px solid #bd976e;
   border-radius: 10px;
-  max-height: 250px;
   @include tablet {
     margin-top: 150px;
   }
@@ -39,8 +38,8 @@
 }
 .admin__box__icon {
   display: flex;
-
-  gap: 40px;
+  flex-direction: column;
+  gap: 20px;
   justify-content: center;
   width: 250px;
   padding: 20px;
@@ -48,6 +47,7 @@
 .admin__box__text {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   font-family: "Playfair Display", Sans-serif;
   font-size: 1.3rem;

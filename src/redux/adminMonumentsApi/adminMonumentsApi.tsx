@@ -37,7 +37,20 @@ export const adminMonumentsApi = createApi({
       }),
       invalidatesTags: ["adminMonuments"],
     }),
+
+    addMonument: builder.mutation({
+      query: (formData) => ({
+        url: `/`,
+        method: "POST",
+        body: formData,
+      }),
+
+      invalidatesTags: ["adminMonuments"],
+    }),
   }),
 });
-export const { useGetAllMonumentsProductQuery, useDeleteMonumentMutation } =
-  adminMonumentsApi;
+export const {
+  useGetAllMonumentsProductQuery,
+  useDeleteMonumentMutation,
+  useAddMonumentMutation,
+} = adminMonumentsApi;

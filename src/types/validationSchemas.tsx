@@ -13,3 +13,18 @@ export const validationSchemaUpdate = Yup.object().shape({
     .min(6, "Пароль повинен мати щонайменше 6 символів!")
     .required("Обов'язкове поле!"),
 });
+
+export const addSchema = Yup.object({
+  title: Yup.string().required("Title is required"),
+  subtitle: Yup.string()
+    .oneOf(["open", "closed"], "Invalid subtitle value")
+    .required("Subtitle is required"),
+  category: Yup.string()
+    .oneOf(
+      ["single", "double", "accessories", "icons"],
+      "Invalid category value"
+    )
+    .required("Category is required"),
+  price: Yup.number().required("обов’язкове поле"),
+  favorite: Yup.boolean(),
+});

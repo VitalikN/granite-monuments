@@ -49,7 +49,9 @@ const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
       }}
     >
       {({ isSubmitting, errors, touched }) => (
-        <Form className={styles.form}>
+        <Form className={`${styles.form} `}>
+          <h2 className={styles.title}>Редагувати профіль</h2>
+
           <div className={styles.form__box}>
             <label className={styles.label}>
               Нова електронна пошта:

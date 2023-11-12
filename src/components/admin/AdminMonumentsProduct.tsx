@@ -9,16 +9,13 @@ import {
   useGetAllMonumentsProductQuery,
 } from "@/redux/adminMonumentsApi/adminMonumentsApi";
 import TechnicalWorks from "../product/TechnicalWorks";
+import AdminAddProduct from "./AdminAddProduct";
 
 const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  // const handleItemsPerPageChange = (event: ChangeEvent<HTMLSelectElement>) => {
-  //   setItemsPerPage(Number(event.target.value));
-  //   setCurrentPage(1);
-  // };
   const { data, error, isLoading, refetch } = useGetAllMonumentsProductQuery({
     page: currentPage,
     limit: itemsPerPage,
@@ -46,43 +43,64 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   }
   if (error || data.total === 0) return <TechnicalWorks title={title} />;
 
-  // if (error || data.total === 0) {
-  //   return (
-  //     <section className={styles.technical__section}>
-  //       <h2 className={styles.single__title}>{title}</h2>
-  //       <p className={styles.technical__works}>
-  //         Ведуться технічні роботи. Перепрошуємо за незручності.
-  //       </p>
-
-  //       <Image
-  //         className={styles.technical__works__img}
-  //         src={"/developer.jpeg"}
-  //         alt="developer"
-  //         width="600"
-  //         height="400"
-  //         priority={true}
-  //       />
-  //     </section>
-  //   );
-  // }
-
   return (
     <div>
       <h2 className={styles.single__title}>{title}</h2>
 
-      <select
-        className={styles.selected__saubtitle}
-        onChange={handleSubtitleChange}
+      <div
+        className={styles.radio__group__box}
         style={{
           display:
-            category === "single" || category === "double" ? "block" : "none",
+            category === "single" || category === "double" ? "flex" : "none",
         }}
       >
-        <option value="">Всі</option>
-        <option value="open">Відкриті</option>
-        <option value="closed">Закриті</option>
-      </select>
-
+        <p className={styles.radio__text}>Оберіть тип:</p>
+        <div className={styles.radio__group}>
+          <label
+            className={`${styles.radio__label} ${
+              selectedSubtitle === "" ? styles.active : ""
+            }`}
+          >
+            <input
+              className={styles.radio__input}
+              type="radio"
+              value=""
+              checked={selectedSubtitle === ""}
+              onChange={handleSubtitleChange}
+            />
+            Всі
+          </label>
+          <label
+            className={`${styles.radio__label} ${
+              selectedSubtitle === "open" ? styles.active : ""
+            }`}
+          >
+            <input
+              className={styles.radio__input}
+              type="radio"
+              value="open"
+              checked={selectedSubtitle === "open"}
+              onChange={handleSubtitleChange}
+            />
+            Відкриті
+          </label>
+          <label
+            className={`${styles.radio__label} ${
+              selectedSubtitle === "closed" ? styles.active : ""
+            }`}
+          >
+            <input
+              className={styles.radio__input}
+              type="radio"
+              value="closed"
+              checked={selectedSubtitle === "closed"}
+              onChange={handleSubtitleChange}
+            />
+            Закриті
+          </label>
+        </div>
+      </div>
+      {/* <AdminAddProduct /> */}
       <ImageList data={data.data} deleteProduct={handleDelete} />
 
       <Pagination
