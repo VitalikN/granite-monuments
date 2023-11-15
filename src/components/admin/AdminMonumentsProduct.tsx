@@ -9,7 +9,7 @@ import {
   useGetAllMonumentsProductQuery,
 } from "@/redux/adminMonumentsApi/adminMonumentsApi";
 import TechnicalWorks from "../product/TechnicalWorks";
-import AdminAddProduct from "./AdminAddProduct";
+import { ToastContainer, toast } from "react-toastify";
 
 const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");
@@ -26,6 +26,7 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
 
   const handleDelete = async (_id: string) => {
     await deleteMonument(_id).unwrap();
+    toast.success(`Товар видалино`);
     refetch();
   };
   const handleSubtitleChange = (e: any) => {
@@ -44,9 +45,14 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   if (error || data.total === 0) return <TechnicalWorks title={title} />;
 
   return (
-    <div>
+    <div className={styles.single__container}>
       <h2 className={styles.single__title}>{title}</h2>
-
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        closeOnClick
+        theme="light"
+      />
       <div
         className={styles.radio__group__box}
         style={{
@@ -100,7 +106,7 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
           </label>
         </div>
       </div>
-      {/* <AdminAddProduct /> */}
+
       <ImageList data={data.data} deleteProduct={handleDelete} />
 
       <Pagination

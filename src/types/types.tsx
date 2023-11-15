@@ -55,10 +55,13 @@ export interface FormValues {
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  formType: string | null;
+  data?: any;
 }
 export interface ModalPropsUpdate {
   onClose: () => void;
+  productId?: string | null;
+  data?: any;
 }
 
 export interface MenuItemsProps {

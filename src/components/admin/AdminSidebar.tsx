@@ -5,38 +5,18 @@ import { FiLogOut } from "react-icons/fi";
 import { useToggleMenu } from "../hooks";
 import { useLogoutMutation } from "@/redux/auth/authAPI";
 
-import UpdateForm from "./UpdateForm";
 import Modal from "./Modal";
 import { MdOutlineCreate } from "react-icons/md";
-import AdminAddProduct from "./AdminAddProduct";
-import { useState } from "react";
 
 const AdminSidebar = () => {
   const [logout] = useLogoutMutation();
-  const { menuOpen, setMenuOpen } = useToggleMenu();
-  const [selectedForm, setSelectedForm] = useState<string | null>(null);
+  const { menuOpen, setMenuOpen, selectedForm, openForm } = useToggleMenu();
 
   const handleLogout = async () => {
     try {
       await logout({});
     } catch (error) {
       console.error("Помилка під час виходу:", error);
-    }
-  };
-
-  const openForm = (form: string) => {
-    setSelectedForm(form);
-    setMenuOpen(true);
-  };
-
-  const renderSelectedForm = () => {
-    switch (selectedForm) {
-      case "update":
-        return <UpdateForm onClose={() => setMenuOpen(false)} />;
-      case "addProduct":
-        return <AdminAddProduct onClose={() => setMenuOpen(false)} />;
-      default:
-        return null;
     }
   };
 
@@ -77,17 +57,19 @@ const AdminSidebar = () => {
           Профіль
           <MdOutlineCreate
             className={styles.admin__icon}
-            onClick={() => openForm("update")}
+            onClick={() => openForm("updateEmail")}
           />
         </h3>
         <h3 className={styles.admin__box__text}>
-          Вихід{" "}
+          Вихід
           <FiLogOut className={styles.admin__icon} onClick={handleLogout} />
         </h3>
       </div>
-      <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
-        {renderSelectedForm()}
-      </Modal>
+      <Modal
+        isOpen={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        formType={selectedForm}
+      />
     </div>
   );
 };

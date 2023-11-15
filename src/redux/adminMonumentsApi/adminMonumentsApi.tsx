@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import store from "../store";
 
-// type RootState = ReturnType<typeof store.getState>;
+type RootState = ReturnType<typeof store.getState>;
 
 export const adminMonumentsApi = createApi({
   reducerPath: "adminMonumentsApi",
@@ -47,10 +47,19 @@ export const adminMonumentsApi = createApi({
 
       invalidatesTags: ["adminMonuments"],
     }),
+    updateMonument: builder.mutation({
+      query: ({ formData, _id }) => ({
+        url: `/${_id}`,
+        method: "PATCH",
+        body: formData,
+      }),
+      invalidatesTags: ["adminMonuments"],
+    }),
   }),
 });
 export const {
   useGetAllMonumentsProductQuery,
   useDeleteMonumentMutation,
   useAddMonumentMutation,
+  useUpdateMonumentMutation,
 } = adminMonumentsApi;

@@ -1,24 +1,29 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import styles from "@/sass/layouts/login.module.scss";
-import { addSchema } from "@/types/validationSchemas";
+import { updateSchema } from "@/types/validationSchemas";
 import { ToastContainer, toast } from "react-toastify";
 import { ErrorFeedbackProps, ModalPropsUpdate } from "@/types/types";
-import { useAddMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
+import { useUpdateMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
 import { useRef, useState } from "react";
 
-const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
+const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
+  onClose,
+
+  data,
+}) => {
   const [selectedImg, setSelectedImg] = useState<File | null>(null);
-  const [errorByImg, setErrorByImg] = useState("none");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFileName, setSelectedFileName] = useState("");
-  const [add] = useAddMonumentMutation();
+  const [update] = useUpdateMonumentMutation();
+
+  console.log(data);
 
   const initialValues = {
-    title: "",
-    subtitle: "",
-    category: "",
-    price: "",
+    title: data.title,
+    subtitle: data.subtitle,
+    category: data.category,
+    price: data.price,
     favorite: false,
   };
 
@@ -26,7 +31,6 @@ const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImg(e.target.files[0]);
       setSelectedFileName(e.target.files[0]?.name || "");
-      setErrorByImg("none");
     }
   };
 
@@ -39,22 +43,14 @@ const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
     if (selectedImg !== null) {
       formData.append("url", selectedImg);
     }
-    if (!selectedImg) {
-      setErrorByImg("block");
-      return;
-    }
 
     try {
-      await add(formData);
-      toast.success(`Новий товар додано`);
-      onClose();
+      await update({ formData, _id: data._id });
+      toast.success(`Товар оновлено`);
+      //   onClose();
     } catch (error) {
       return toast.error("error");
     }
-  };
-
-  const openFileInput = () => {
-    fileInputRef.current?.click();
   };
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
@@ -68,12 +64,13 @@ const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={addSchema}
+      validationSchema={updateSchema}
       onSubmit={handleSubmit}
     >
       {({ errors, touched }) => (
         <Form className={styles.form}>
-          <h2 className={styles.title}>Додати пам`ятник</h2>
+          <h2 className={styles.title}>Оновити дані пам`ятника</h2>
+
           <ToastContainer
             position="top-right"
             autoClose={3000}
@@ -147,7 +144,7 @@ const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
                 className={`${styles.input} ${styles.input__img}`}
                 onClick={() => fileInputRef.current?.click()}
               >
-                {selectedFileName || <> {/* <AiOutlinePlus size={20} /> */}</>}
+                {selectedFileName}
               </div>
               <Field
                 style={{
@@ -158,17 +155,14 @@ const AdminAddProduct: React.FC<ModalPropsUpdate> = ({ onClose }) => {
                 name="url"
                 onChange={handleOnChange}
               />
-              <div style={{ display: errorByImg }}>
-                <span className={styles.error}>оберіть зображення</span>
-              </div>
             </label>
           </div>
           <button className={styles.styledBtn} type="submit">
-            Додати
+            Редагувати
           </button>
         </Form>
       )}
     </Formik>
   );
 };
-export default AdminAddProduct;
+export default AdminUpdateProduct;

@@ -1,19 +1,41 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { useClickOutside } from "../hooks";
-import React, { RefObject } from "react";
+import React, { RefObject, useState } from "react";
 import { ModalProps } from "@/types/types";
 import styles from "../../sass/layouts/modal.module.scss";
+import UpdateForm from "./UpdateForm";
+import AdminAddProduct from "./AdminAddProduct";
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+const Modal = ({ data, isOpen, onClose, formType }: ModalProps) => {
   const modalRef: RefObject<HTMLDivElement> = React.createRef();
-  useClickOutside(modalRef, isOpen, onClose);
 
+  useClickOutside(modalRef, isOpen, () => {
+    onClose();
+  });
   if (!isOpen) return null;
+
+  const renderForm = () => {
+    switch (formType) {
+      case "updateEmail":
+        return <UpdateForm onClose={onClose} />;
+      case "addProduct":
+        return <AdminAddProduct onClose={onClose} />;
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={styles.modal}>
       <div className={styles.modal__content} ref={modalRef}>
-        <AiOutlineClose className={styles.modal__close} onClick={onClose} />
-        {children}
+        <AiOutlineClose
+          className={styles.modal__close}
+          onClick={() => {
+            onClose();
+          }}
+        />
+        {renderForm()}
       </div>
     </div>
   );

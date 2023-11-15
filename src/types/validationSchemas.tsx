@@ -28,3 +28,14 @@ export const addSchema = Yup.object({
   price: Yup.number().required("обов’язкове поле"),
   favorite: Yup.boolean(),
 });
+
+export const updateSchema = Yup.object({
+  title: Yup.string(),
+  subtitle: Yup.string().oneOf(["open", "closed"], "Invalid subtitle value"),
+  category: Yup.string().oneOf(
+    ["single", "double", "accessories", "icons"],
+    "Invalid category value"
+  ),
+  price: Yup.number(),
+  favorite: Yup.boolean(),
+});

@@ -9,59 +9,64 @@ import authSelector from "@/redux/auth/authSelector";
 import { toast } from "react-toastify";
 
 import { useAddMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
-export const useAdminAddProduct = (onClose: () => void) => {
-  const [selectedImg, setSelectedImg] = useState<File | null>(null);
-  const [errorByImg, setErrorByImg] = useState("none");
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedFileName, setSelectedFileName] = useState("");
-  const [add] = useAddMonumentMutation();
+// export const useAdminAddProduct = (onClose: () => void) => {
+//   const [selectedImg, setSelectedImg] = useState<File | null>(null);
+//   const [errorByImg, setErrorByImg] = useState("none");
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedImg(e.target.files[0]);
-      setSelectedFileName(e.target.files[0]?.name || "");
-      setErrorByImg("none");
-    }
-  };
+//   const fileInputRef = useRef<HTMLInputElement>(null);
+//   const [selectedFileName, setSelectedFileName] = useState("");
+//   const [add] = useAddMonumentMutation();
 
-  const handleSubmit = async (values: any) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("subtitle", values.subtitle);
-    formData.append("category", values.category);
-    formData.append("price", values.price);
-    if (selectedImg !== null) {
-      formData.append("url", selectedImg);
-    }
-    if (!selectedImg) {
-      setErrorByImg("block");
-      return;
-    }
+//   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     if (e.target.files && e.target.files[0]) {
+//       setSelectedImg(e.target.files[0]);
+//       setSelectedFileName(e.target.files[0]?.name || "");
+//       setErrorByImg("none");
+//     }
+//   };
 
-    try {
-      await add(formData);
-      toast.success(`Новий товар додано`);
-      onClose();
-    } catch (error) {
-      return toast.error("error");
-    }
-  };
+//   const handleSubmit = async (values: any) => {
+//     const formData = new FormData();
+//     formData.append("title", values.title);
+//     formData.append("subtitle", values.subtitle);
+//     formData.append("category", values.category);
+//     formData.append("price", values.price);
+//     if (selectedImg !== null) {
+//       formData.append("url", selectedImg);
+//     }
+//     if (!selectedImg) {
+//       setErrorByImg("block");
+//       return;
+//     }
 
-  const openFileInput = () => {
-    fileInputRef.current?.click();
-  };
+//     try {
+//       await add(formData);
+//       toast.success(`Новий товар додано`);
+//       onClose();
+//     } catch (error) {
+//       return toast.error("error");
+//     }
+//   };
 
-  return {
-    selectedImg,
-    errorByImg,
-    fileInputRef,
-    selectedFileName,
-    handleOnChange,
-    handleSubmit,
-    openFileInput,
-  };
-};
+//   const openFileInput = () => {
+//     fileInputRef.current?.click();
+//   };
+
+//   return {
+//     selectedImg,
+//     errorByImg,
+//     fileInputRef,
+//     selectedFileName,
+//     handleOnChange,
+//     handleSubmit,
+//     openFileInput,
+//   };
+// };
+
+/** */
+
+//
 
 export const useLogin = () => {
   const [login, { isLoading, isError, error }] = useLoginMutation();
@@ -91,9 +96,13 @@ export const useLogin = () => {
     values: FormValues,
     { resetForm }: { resetForm: () => void }
   ) => {
-    await handleLogin(values);
-    resetForm();
-    handleLoginError();
+    try {
+      await handleLogin(values);
+      resetForm();
+      console.log("eeee");
+    } catch (error) {
+      handleLoginError();
+    }
   };
 
   return { isLoading, isError, error, handleSubmit };
@@ -176,6 +185,13 @@ export const useClickOutside = (
 export const useToggleMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [selectedForm, setSelectedForm] = useState<string | null>(null);
+
+  const openForm = (form: string) => {
+    setSelectedForm(form);
+    setMenuOpen(true);
+  };
+
   useEffect(() => {
     if (menuOpen) {
       document.body.classList.add("body-no-scroll");
@@ -188,10 +204,15 @@ export const useToggleMenu = () => {
     };
   }, [menuOpen]);
 
-  return { menuOpen, setMenuOpen };
+  return {
+    menuOpen,
+    setMenuOpen,
+    selectedForm,
+    openForm,
+  };
 };
 
-export const useSimpleLightbox = (images: any[]) => {
+export const useSimpleLightbox = (data: any[]) => {
   useEffect(() => {
     const lightbox = new SimpleLightbox(".single__list a", {
       captionDelay: 250,
@@ -210,5 +231,5 @@ export const useSimpleLightbox = (images: any[]) => {
     return () => {
       lightbox.destroy();
     };
-  }, [images]);
+  }, [data]);
 };

@@ -50,12 +50,12 @@ export const authApi = createApi({
     current: builder.query({
       query: () => "/current",
 
-      // onQueryStarted: (_, { dispatch, getState }) => {
-      //   const token = (getState() as RootState).auth.token;
-      //   if (!token) {
-      //     // dispatch(clearToken());
-      //   }
-      // },
+      onQueryStarted: (_, { dispatch, getState }) => {
+        const token = (getState() as RootState).auth.token;
+        if (!token) {
+          dispatch(clearToken());
+        }
+      },
       providesTags: ["auth"],
     }),
   }),
