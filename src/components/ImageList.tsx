@@ -8,6 +8,8 @@ import { ImageListProps, ImageProps } from "@/types/types";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
 import { MdOutlineDeleteForever, MdOutlineCreate } from "react-icons/md";
+import { useState } from "react";
+import AdminUpdateProduct from "./admin/AdminUpdateProduct";
 
 export const ImageList: React.FC<ImageListProps> = ({
   data,
@@ -16,6 +18,12 @@ export const ImageList: React.FC<ImageListProps> = ({
   // useSimpleLightbox(data);
   const isAdmin = useSelector(authSelector.getAdminEmail);
 
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const handleOpenUpdateForm = (product) => {
+    setSelectedProduct(product);
+    // console.log("ImageList", product);
+  };
   return (
     <>
       {data && (
@@ -39,7 +47,9 @@ export const ImageList: React.FC<ImageListProps> = ({
                   {isAdmin && deleteProduct && (
                     <>
                       <MdOutlineCreate
-                        onClick={() => console.log("click")}
+                        onClick={() =>
+                          handleOpenUpdateForm({ _id, url, title, price })
+                        }
                         className={`${styles.single__icon} ${styles.single__icon__create}`}
                       />
                       <MdOutlineDeleteForever
@@ -53,6 +63,12 @@ export const ImageList: React.FC<ImageListProps> = ({
             </li>
           ))}
         </ul>
+      )}
+      {selectedProduct && (
+        <AdminUpdateProduct
+          data={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
       )}
     </>
   );

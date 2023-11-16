@@ -4,7 +4,7 @@ import { updateSchema } from "@/types/validationSchemas";
 import { ToastContainer, toast } from "react-toastify";
 import { ErrorFeedbackProps, ModalPropsUpdate } from "@/types/types";
 import { useUpdateMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
   onClose,
@@ -12,20 +12,36 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
   data,
 }) => {
   const [selectedImg, setSelectedImg] = useState<File | null>(null);
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [selectedFileName, setSelectedFileName] = useState("");
   const [update] = useUpdateMonumentMutation();
 
-  console.log(data);
-
-  const initialValues = {
+  const [initialValues, setInitialValues] = useState({
     title: data.title,
     subtitle: data.subtitle,
     category: data.category,
     price: data.price,
     favorite: false,
-  };
+  });
+
+  useEffect(() => {
+    setInitialValues((prevValues) => ({
+      ...prevValues,
+      title: data.title,
+      subtitle: data.subtitle,
+      category: data.category,
+      price: data.price,
+      favorite: false,
+    }));
+  }, [data]);
+
+  // const initialValues = {
+  //   title: data.title,
+  //   subtitle: data.subtitle,
+  //   category: data.category,
+  //   price: data.price,
+  //   favorite: false,
+  // };
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -45,6 +61,8 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
     }
 
     try {
+      console.log(...formData);
+
       await update({ formData, _id: data._id });
       toast.success(`Товар оновлено`);
       //   onClose();
@@ -66,6 +84,7 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
       initialValues={initialValues}
       validationSchema={updateSchema}
       onSubmit={handleSubmit}
+      enableReinitialize
     >
       {({ errors, touched }) => (
         <Form className={styles.form}>
