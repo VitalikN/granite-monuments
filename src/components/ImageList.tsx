@@ -20,7 +20,7 @@ export const ImageList: React.FC<ImageListProps> = ({
 
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const handleOpenUpdateForm = (product) => {
+  const handleOpenUpdateForm = (product: any) => {
     setSelectedProduct(product);
     // console.log("ImageList", product);
   };

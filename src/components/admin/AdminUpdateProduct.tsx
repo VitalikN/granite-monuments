@@ -61,8 +61,6 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
     }
 
     try {
-      console.log(...formData);
-
       await update({ formData, _id: data._id });
       toast.success(`Товар оновлено`);
       //   onClose();
