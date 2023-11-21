@@ -24,6 +24,8 @@ export const ImageList: React.FC<ImageListProps> = ({
     setSelectedProduct(product);
     // console.log("ImageList", product);
   };
+  // console.log(data);
+
   return (
     <>
       {data && (

@@ -3,6 +3,7 @@
 import AdminMonumentsProduct from "./AdminMonumentsProduct";
 import AdminSidebar from "./AdminSidebar";
 import styles from "../../sass/layouts/adminAccessoriesProduct.module.scss";
+import Loader from "../Loader";
 
 const AdminSingleProduct: React.FC = () => {
   return (

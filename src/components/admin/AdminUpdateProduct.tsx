@@ -25,14 +25,15 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
   });
 
   useEffect(() => {
-    setInitialValues((prevValues) => ({
-      ...prevValues,
+    console.log("New data:", data);
+    setInitialValues({
       title: data.title,
       subtitle: data.subtitle,
       category: data.category,
       price: data.price,
       favorite: false,
-    }));
+    });
+    console.log("38 data:", data);
   }, [data]);
 
   // const initialValues = {

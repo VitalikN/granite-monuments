@@ -7,8 +7,8 @@ type RootState = ReturnType<typeof store.getState>;
 export const adminMonumentsApi = createApi({
   reducerPath: "adminMonumentsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://monuments-backend.onrender.com/api/monuments",
-    // baseUrl: "http://localhost:3001/api/monuments",
+    // baseUrl: "https://monuments-backend.onrender.com/api/monuments",
+    baseUrl: "http://localhost:3001/api/monuments",
 
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;

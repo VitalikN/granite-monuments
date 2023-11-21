@@ -10,6 +10,7 @@ import {
 } from "@/redux/adminMonumentsApi/adminMonumentsApi";
 import TechnicalWorks from "../product/TechnicalWorks";
 import { ToastContainer, toast } from "react-toastify";
+import Loader from "../Loader";
 
 const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");
@@ -40,7 +41,7 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   }, [currentPage, itemsPerPage, category, selectedSubtitle, refetch]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
   if (error || data.total === 0) return <TechnicalWorks title={title} />;
 

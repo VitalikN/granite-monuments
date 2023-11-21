@@ -31,7 +31,7 @@ const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      console.log(values);
+      // console.log(values);
       await update(values);
       onClose();
     } catch (error) {

@@ -6,6 +6,7 @@ import styles from "../../sass/layouts/monumentsList.module.scss";
 import { MonumentsListProps } from "@/types/types";
 import { useGetAllMonumentsQuery } from "@/redux/monuments/monumentsApi";
 import TechnicalWorks from "./TechnicalWorks";
+import Loader from "../Loader";
 
 const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");
@@ -26,7 +27,7 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error || data.total === 0) return <TechnicalWorks title={title} />;
