@@ -25,12 +25,15 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
     setSelectedSubtitle(newSubtitle);
     setCurrentPage(1);
   };
+  console.log(data);
 
   if (isLoading) {
     return <Loader />;
   }
 
-  if (error || data.total === 0) return <TechnicalWorks title={title} />;
+  if (error || !data || data.total === 0 || !data.data) {
+    return <TechnicalWorks title={title} />;
+  }
 
   return (
     <section className={styles.single__section}>
@@ -90,8 +93,7 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
             </label>
           </div>
         </div>
-        <ImageList data={data.data} />
-
+        {isLoading ? <Loader /> : <ImageList data={data.data} />}
         <Pagination
           totalItems={data.total}
           itemsPerPage={itemsPerPage}
