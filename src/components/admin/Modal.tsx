@@ -4,9 +4,9 @@ import React, { RefObject, useState } from "react";
 import { ModalProps } from "@/types/types";
 import styles from "../../sass/layouts/modal.module.scss";
 import UpdateForm from "./UpdateForm";
-import AdminAddProduct from "./AdminAddProduct";
+import AdminProductForm from "./AdminProductForm";
 
-const Modal = ({ data, isOpen, onClose, formType }: ModalProps) => {
+const Modal = ({ isOpen, onClose, formType }: ModalProps) => {
   const modalRef: RefObject<HTMLDivElement> = React.createRef();
 
   useClickOutside(modalRef, isOpen, () => {
@@ -19,7 +19,7 @@ const Modal = ({ data, isOpen, onClose, formType }: ModalProps) => {
       case "updateEmail":
         return <UpdateForm onClose={onClose} />;
       case "addProduct":
-        return <AdminAddProduct onClose={onClose} />;
+        return <AdminProductForm action={"add"} onClose={onClose} />;
 
       default:
         return null;

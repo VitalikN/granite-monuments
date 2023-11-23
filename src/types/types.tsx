@@ -61,7 +61,12 @@ export interface ModalProps {
 export interface ModalPropsUpdate {
   onClose: () => void;
   productId?: string | null;
+}
+export interface AdminProductFormProps {
+  onClose: () => void;
+  productId?: string | null;
   data?: any;
+  action: "add" | "update";
 }
 
 export interface MenuItemsProps {
@@ -72,4 +77,7 @@ export interface ImageProps {
   url: string;
   price: number;
   title: string;
+  category: string;
+  favorite: boolean;
+  subtitle: string;
 }

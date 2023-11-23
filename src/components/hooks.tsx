@@ -8,65 +8,78 @@ import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
 import { toast } from "react-toastify";
 
-import { useAddMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
+import {
+  useAddMonumentMutation,
+  useUpdateMonumentMutation,
+} from "@/redux/adminMonumentsApi/adminMonumentsApi";
 
-// export const useAdminAddProduct = (onClose: () => void) => {
-//   const [selectedImg, setSelectedImg] = useState<File | null>(null);
-//   const [errorByImg, setErrorByImg] = useState("none");
+const useFormLogic = (
+  onSubmit: () => void,
+  action: "add" | "update",
+  data: any
+) => {
+  const [selectedImg, setSelectedImg] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [addMutation] = useAddMonumentMutation();
+  const [updateMutation] = useUpdateMonumentMutation();
 
-//   const fileInputRef = useRef<HTMLInputElement>(null);
-//   const [selectedFileName, setSelectedFileName] = useState("");
-//   const [add] = useAddMonumentMutation();
+  const [selectedFileName, setSelectedFileName] = useState("");
 
-//   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     if (e.target.files && e.target.files[0]) {
-//       setSelectedImg(e.target.files[0]);
-//       setSelectedFileName(e.target.files[0]?.name || "");
-//       setErrorByImg("none");
-//     }
-//   };
+  const initialValues = {
+    title: data?.title || "",
+    subtitle: data?.subtitle || "",
+    category: data?.category || "",
+    price: data?.price || "",
+    favorite: false,
+  };
 
-//   const handleSubmit = async (values: any) => {
-//     const formData = new FormData();
-//     formData.append("title", values.title);
-//     formData.append("subtitle", values.subtitle);
-//     formData.append("category", values.category);
-//     formData.append("price", values.price);
-//     if (selectedImg !== null) {
-//       formData.append("url", selectedImg);
-//     }
-//     if (!selectedImg) {
-//       setErrorByImg("block");
-//       return;
-//     }
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setSelectedImg(e.target.files[0]);
+      setSelectedFileName(e.target.files[0]?.name || "");
+    }
+  };
 
-//     try {
-//       await add(formData);
-//       toast.success(`Новий товар додано`);
-//       onClose();
-//     } catch (error) {
-//       return toast.error("error");
-//     }
-//   };
+  const handleSubmit = async (values: any) => {
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("subtitle", values.subtitle);
+    formData.append("category", values.category);
+    formData.append("price", values.price);
+    if (selectedImg !== null) {
+      formData.append("url", selectedImg);
+    }
 
-//   const openFileInput = () => {
-//     fileInputRef.current?.click();
-//   };
+    try {
+      if (action === "add") {
+        await addMutation(formData);
+        toast.success(`Новий товар додано`);
+      } else if (action === "update") {
+        await updateMutation({ formData, _id: data._id });
+        toast.success(`Товар оновлено`);
+      }
 
-//   return {
-//     selectedImg,
-//     errorByImg,
-//     fileInputRef,
-//     selectedFileName,
-//     handleOnChange,
-//     handleSubmit,
-//     openFileInput,
-//   };
-// };
+      onSubmit();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-/** */
+  const openFileInput = () => {
+    fileInputRef.current?.click();
+  };
 
-//
+  return {
+    initialValues,
+    handleOnChange,
+    handleSubmit,
+    openFileInput,
+    fileInputRef,
+    selectedFileName,
+  };
+};
+
+export default useFormLogic;
 
 export const useLogin = () => {
   const [login, { isLoading, isError, error }] = useLoginMutation();

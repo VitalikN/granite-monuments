@@ -1,11 +1,17 @@
 @import "../utils/container.module";
-
+@import "../utils/mixins.module";
 .single__list {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 25px;
   padding-top: 3em;
+  @include tablet {
+    flex-direction: row;
+    align-items: stretch;
+  }
 }
 .single__item {
   display: flex;
@@ -15,8 +21,11 @@
   border-radius: 20px;
   width: 342px;
   transition: all 0.5s;
-  @media screen and (max-width: 350px) {
+  @media screen and (max-width: 400px) {
     width: 270px;
+  }
+  @include tablet {
+    width: 300px;
   }
   &:hover,
   &:focus {
@@ -32,11 +41,10 @@
   cursor: pointer;
   border-radius: 20px 20px 0 0;
   width: 100%;
-  height: auto;
+  height: 70%;
 }
 
 .single__list__box {
-  margin-top: auto;
   padding: 20px;
   font-size: 1rem;
   font-weight: 400;

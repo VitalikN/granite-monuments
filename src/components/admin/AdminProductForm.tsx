@@ -1,74 +1,23 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import styles from "@/sass/layouts/login.module.scss";
-import { updateSchema } from "@/types/validationSchemas";
-import { ToastContainer, toast } from "react-toastify";
-import { ErrorFeedbackProps, ModalPropsUpdate } from "@/types/types";
-import { useUpdateMonumentMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
-import { useEffect, useRef, useState } from "react";
+import { addSchema, updateSchema } from "@/types/validationSchemas";
+import { ToastContainer } from "react-toastify";
+import { ErrorFeedbackProps, AdminProductFormProps } from "@/types/types";
 
-const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
+import useFormLogic from "../hooks";
+
+const AdminProductForm: React.FC<AdminProductFormProps> = ({
   onClose,
-
+  action,
   data,
 }) => {
-  const [selectedImg, setSelectedImg] = useState<File | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  const [selectedFileName, setSelectedFileName] = useState("");
-  const [update] = useUpdateMonumentMutation();
-
-  const [initialValues, setInitialValues] = useState({
-    title: data.title,
-    subtitle: data.subtitle,
-    category: data.category,
-    price: data.price,
-    favorite: false,
-  });
-
-  useEffect(() => {
-    console.log("New data:", data);
-    setInitialValues({
-      title: data.title,
-      subtitle: data.subtitle,
-      category: data.category,
-      price: data.price,
-      favorite: false,
-    });
-    console.log("38 data:", data);
-  }, [data]);
-
-  // const initialValues = {
-  //   title: data.title,
-  //   subtitle: data.subtitle,
-  //   category: data.category,
-  //   price: data.price,
-  //   favorite: false,
-  // };
-
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setSelectedImg(e.target.files[0]);
-      setSelectedFileName(e.target.files[0]?.name || "");
-    }
-  };
-
-  const handleSubmit = async (values: any) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("subtitle", values.subtitle);
-    formData.append("category", values.category);
-    formData.append("price", values.price);
-    if (selectedImg !== null) {
-      formData.append("url", selectedImg);
-    }
-
-    try {
-      await update({ formData, _id: data._id });
-      toast.success(`Товар оновлено`);
-      //   onClose();
-    } catch (error) {
-      return toast.error("error");
-    }
-  };
+  const {
+    initialValues,
+    handleOnChange,
+    handleSubmit,
+    openFileInput,
+    selectedFileName,
+  } = useFormLogic(onClose, action, data);
 
   const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
     return (
@@ -81,13 +30,15 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={updateSchema}
+      validationSchema={action === "add" ? addSchema : updateSchema}
       onSubmit={handleSubmit}
       enableReinitialize
     >
       {({ errors, touched }) => (
         <Form className={styles.form}>
-          <h2 className={styles.title}>Оновити дані пам`ятника</h2>
+          <h2 className={styles.title}>
+            {action === "add" ? "Додати пам'ятник" : "Оновити дані пам'ятника"}
+          </h2>
 
           <ToastContainer
             position="top-right"
@@ -132,9 +83,7 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
                 name="category"
                 error={touched.category && errors.category}
               >
-                <option value="" disabled>
-                  Оберіть категорію
-                </option>
+                <option value="" disabled></option>
                 <option value="single">одинарний</option>
                 <option value="double">подвійний</option>
                 <option value="accessories">Аксесуари</option>
@@ -160,7 +109,7 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
               Зображення:
               <div
                 className={`${styles.input} ${styles.input__img}`}
-                onClick={() => fileInputRef.current?.click()}
+                onClick={openFileInput}
               >
                 {selectedFileName}
               </div>
@@ -176,11 +125,11 @@ const AdminUpdateProduct: React.FC<ModalPropsUpdate> = ({
             </label>
           </div>
           <button className={styles.styledBtn} type="submit">
-            Редагувати
+            {action === "add" ? "Додати" : "Редагувати"}
           </button>
         </Form>
       )}
     </Formik>
   );
 };
-export default AdminUpdateProduct;
+export default AdminProductForm;
