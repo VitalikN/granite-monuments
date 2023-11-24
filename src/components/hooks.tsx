@@ -1,17 +1,17 @@
 import { useState, useEffect, RefObject, useRef } from "react";
-
-import { AuthResult, FormValues, MyErrorType } from "@/types/types";
-import { useCurrentQuery, useLoginMutation } from "@/redux/auth/authAPI";
 import { useSelector } from "react-redux";
-import authSelector from "@/redux/auth/authSelector";
-import { toast } from "react-toastify";
 
+import { useCurrentQuery, useLoginMutation } from "@/redux/auth/authAPI";
+import authSelector from "@/redux/auth/authSelector";
 import {
   useAddMonumentMutation,
   useUpdateMonumentMutation,
 } from "@/redux/adminMonumentsApi/adminMonumentsApi";
 
-const useFormLogic = (
+import { AuthResult, FormValues, MyErrorType } from "@/types/types";
+import { toast } from "react-toastify";
+
+export const useFormLogic = (
   onSubmit: () => void,
   action: "add" | "update",
   data: any
@@ -77,21 +77,24 @@ const useFormLogic = (
   };
 };
 
-export default useFormLogic;
-
 export const useLogin = () => {
   const [login, { isLoading, isError, error }] = useLoginMutation();
 
   const handleLogin = async (values: FormValues) => {
     try {
-      await login(values);
+      const response = await login(values);
+      if ("data" in response) {
+        toast.success("Вхід виконано успішно!");
+      } else {
+        toast.error("Невірна електронна адреса або пароль. Спробуйте ще раз.");
+      }
     } catch (error) {
       console.error("Login error:", error);
     }
   };
 
   const handleLoginError = () => {
-    toast.error("Invalid email or password. Please try again.", {
+    toast.error("Невірна електронна адреса або пароль. Спробуйте ще раз.", {
       position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
@@ -109,8 +112,8 @@ export const useLogin = () => {
   ) => {
     try {
       await handleLogin(values);
+
       resetForm();
-      // console.log("eeee");
     } catch (error) {
       handleLoginError();
     }

@@ -4,7 +4,7 @@ import { addSchema, updateSchema } from "@/types/validationSchemas";
 import { ToastContainer } from "react-toastify";
 import { ErrorFeedbackProps, AdminProductFormProps } from "@/types/types";
 
-import useFormLogic from "../hooks";
+import { useFormLogic } from "../hooks";
 
 const AdminProductForm: React.FC<AdminProductFormProps> = ({
   onClose,

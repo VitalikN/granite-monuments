@@ -7,6 +7,8 @@ import authSelector from "@/redux/auth/authSelector";
 import { MdOutlineDeleteForever, MdOutlineCreate } from "react-icons/md";
 import { useState } from "react";
 import AdminProductForm from "./admin/AdminProductForm";
+import { useUpdateMonumentFavoriteMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
+import Modal from "./admin/Modal";
 
 export const ImageList: React.FC<ImageListProps> = ({
   data,
@@ -16,8 +18,20 @@ export const ImageList: React.FC<ImageListProps> = ({
 
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const [mutateAsync] = useUpdateMonumentFavoriteMutation();
+
   const handleOpenUpdateForm = (product: any) => {
     setSelectedProduct(product);
+  };
+
+  const handleUpdateFavorite = async (id: string, currentFavorite: boolean) => {
+    try {
+      const newFavorite = { favorite: !currentFavorite };
+      await mutateAsync({ id, newFavorite });
+      console.log("Успішно оновлено об'єкт", newFavorite);
+    } catch (error) {
+      console.error("Помилка при оновленні об'єкта", error);
+    }
   };
 
   return (
@@ -46,11 +60,22 @@ export const ImageList: React.FC<ImageListProps> = ({
                 <div className={styles.single__list__box}>
                   <p>{title}</p>
                   <div className={styles.single__list__box__icon}>
-                    <p className={styles.single__list__box__price}>
-                      ціна:{price}
-                    </p>
+                    {favorite ? (
+                      <p className={styles.single__list__box__price}>
+                        ціна: {price}
+                      </p>
+                    ) : (
+                      <p>Кінцева вартість при замовлені</p>
+                    )}
                     {isAdmin && deleteProduct && (
-                      <>
+                      <div className={styles.single__box__icon}>
+                        <label className={styles.checkbox}>
+                          <input
+                            onChange={() => handleUpdateFavorite(_id, favorite)}
+                            type="checkbox"
+                          />
+                          <span className={styles.chip}></span>
+                        </label>
                         <MdOutlineCreate
                           onClick={() =>
                             handleOpenUpdateForm({
@@ -69,7 +94,7 @@ export const ImageList: React.FC<ImageListProps> = ({
                           className={styles.single__icon}
                           onClick={() => deleteProduct(_id)}
                         />
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -79,11 +104,13 @@ export const ImageList: React.FC<ImageListProps> = ({
         </ul>
       )}
       {selectedProduct && (
-        <AdminProductForm
-          action={"update"}
-          data={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-        />
+        <Modal isOpen={true} onClose={() => setSelectedProduct(null)}>
+          <AdminProductForm
+            action={"update"}
+            data={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+          />
+        </Modal>
       )}
     </>
   );

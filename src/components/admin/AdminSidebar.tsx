@@ -4,9 +4,10 @@ import styles from "../../sass/layouts/adminSidebar.module.scss";
 import { FiLogOut } from "react-icons/fi";
 import { useToggleMenu } from "../hooks";
 import { useLogoutMutation } from "@/redux/auth/authAPI";
-
 import Modal from "./Modal";
 import { MdOutlineCreate } from "react-icons/md";
+import AdminProductForm from "./AdminProductForm";
+import UpdateForm from "./UpdateForm";
 
 const AdminSidebar = () => {
   const [logout] = useLogoutMutation();
@@ -65,11 +66,14 @@ const AdminSidebar = () => {
           <FiLogOut className={styles.admin__icon} onClick={handleLogout} />
         </h3>
       </div>
-      <Modal
-        isOpen={menuOpen}
-        onClose={() => setMenuOpen(false)}
-        formType={selectedForm}
-      />
+      <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
+        {selectedForm === "addProduct" && (
+          <AdminProductForm action={"add"} onClose={() => setMenuOpen(false)} />
+        )}
+        {selectedForm === "updateEmail" && (
+          <UpdateForm onClose={() => setMenuOpen(false)} />
+        )}
+      </Modal>
     </div>
   );
 };

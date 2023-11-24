@@ -55,7 +55,8 @@ export interface FormValues {
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  formType: string | null;
+  // formType: string | null;
+  children: any;
   data?: any;
 }
 export interface ModalPropsUpdate {

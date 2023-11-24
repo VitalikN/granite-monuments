@@ -55,11 +55,21 @@ export const adminMonumentsApi = createApi({
       }),
       invalidatesTags: ["adminMonuments"],
     }),
+    updateMonumentFavorite: builder.mutation({
+      query: ({ id, newFavorite }) => ({
+        url: `/${id}/favorite`,
+        method: "PATCH",
+        body: newFavorite,
+      }),
+      invalidatesTags: ["adminMonuments"],
+    }),
   }),
 });
+
 export const {
   useGetAllMonumentsProductQuery,
   useDeleteMonumentMutation,
   useAddMonumentMutation,
   useUpdateMonumentMutation,
+  useUpdateMonumentFavoriteMutation,
 } = adminMonumentsApi;

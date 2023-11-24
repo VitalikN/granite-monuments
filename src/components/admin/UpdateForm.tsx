@@ -12,6 +12,7 @@ import { validationSchemaUpdate } from "@/types/validationSchemas";
 import { useUpdateMutation } from "@/redux/auth/authAPI";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
   const email = useSelector(authSelector.getAdminEmail);
@@ -31,8 +32,8 @@ const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
 
   const handleSubmit = async (values: FormValues) => {
     try {
-      // console.log(values);
       await update(values);
+      toast.success(`Дані оновлено`);
       onClose();
     } catch (error) {
       console.error("Login error:", error);

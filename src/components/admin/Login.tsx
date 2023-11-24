@@ -60,7 +60,7 @@ const Login: React.FC = () => {
                 <ErrorFeedback name="password" />
               </div>
               <button className={styles.styledBtn} type="submit">
-                {isLoading ? "Loading...." : "Sign in"}
+                {isLoading ? "Loading...." : "Вхід"}
               </button>
               {isError && (
                 <ToastContainer
