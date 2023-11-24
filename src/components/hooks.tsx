@@ -1,7 +1,5 @@
 import { useState, useEffect, RefObject, useRef } from "react";
 
-import SimpleLightbox from "simplelightbox";
-
 import { AuthResult, FormValues, MyErrorType } from "@/types/types";
 import { useCurrentQuery, useLoginMutation } from "@/redux/auth/authAPI";
 import { useSelector } from "react-redux";
@@ -223,26 +221,4 @@ export const useToggleMenu = () => {
     selectedForm,
     openForm,
   };
-};
-
-export const useSimpleLightbox = (data: any[]) => {
-  useEffect(() => {
-    const lightbox = new SimpleLightbox(".single__list a", {
-      captionDelay: 250,
-      disableRightClick: true,
-      showCounter: false,
-      scrollZoom: false,
-    });
-
-    lightbox.on("shown.simplelightbox", () => {
-      document.body.classList.add("body-lock");
-    });
-
-    lightbox.on("close.simplelightbox", () => {
-      document.body.classList.remove("body-lock");
-    });
-    return () => {
-      lightbox.destroy();
-    };
-  }, [data]);
 };

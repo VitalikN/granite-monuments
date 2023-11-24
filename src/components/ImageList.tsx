@@ -1,15 +1,11 @@
 import Image from "next/image";
 
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-
 import styles from "../sass/layouts/imageList.module.scss";
 import { ImageListProps, ImageProps } from "@/types/types";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
 import { MdOutlineDeleteForever, MdOutlineCreate } from "react-icons/md";
 import { useState } from "react";
-// import AdminUpdateProduct from "./admin/AdminUpdateProduct";
 import AdminProductForm from "./admin/AdminProductForm";
 
 export const ImageList: React.FC<ImageListProps> = ({

@@ -25,7 +25,6 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
     setSelectedSubtitle(newSubtitle);
     setCurrentPage(1);
   };
-  console.log(data);
 
   if (isLoading) {
     return <Loader />;
