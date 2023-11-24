@@ -61,7 +61,7 @@ export const ImageList: React.FC<ImageListProps> = ({
                 <div
                   className={styles.single__list__box}
                   style={{
-                    display: category === "icons" ? "none" : "flex",
+                    display: category === "icons" ? "none" : "block",
                   }}
                 >
                   <p>{title}</p>
