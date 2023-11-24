@@ -108,7 +108,10 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
         </div>
       </div>
 
-      <ImageList data={data.data} deleteProduct={handleDelete} />
+      <ImageList
+        data={data.data}
+        deleteProduct={handleDelete}
+      />
 
       <Pagination
         totalItems={data.total}

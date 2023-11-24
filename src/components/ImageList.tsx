@@ -13,6 +13,7 @@ import Modal from "./admin/Modal";
 export const ImageList: React.FC<ImageListProps> = ({
   data,
   deleteProduct,
+  category,
 }) => {
   const isAdmin = useSelector(authSelector.getAdminEmail);
 
@@ -57,7 +58,12 @@ export const ImageList: React.FC<ImageListProps> = ({
                   height="300"
                   priority={true}
                 />
-                <div className={styles.single__list__box}>
+                <div
+                  className={styles.single__list__box}
+                  style={{
+                    display: category === "icons" ? "none" : "flex",
+                  }}
+                >
                   <p>{title}</p>
                   <div className={styles.single__list__box__icon}>
                     {favorite ? (

@@ -92,7 +92,11 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
             </label>
           </div>
         </div>
-        {isLoading ? <Loader /> : <ImageList data={data.data} />}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <ImageList data={data.data} category={category} />
+        )}
         <Pagination
           totalItems={data.total}
           itemsPerPage={itemsPerPage}

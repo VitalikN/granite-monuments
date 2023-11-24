@@ -26,12 +26,12 @@ export interface PaginationProps {
 
 export interface ImageListProps {
   data: any;
-  deleteProduct?: (productId: string) => void; // Додайте цей рядок
+  deleteProduct?: (productId: string) => void;
+  category?: string;
 }
 
 export interface MonumentsListProps {
   category?: string;
-
   title: string;
 }
 
@@ -55,7 +55,6 @@ export interface FormValues {
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  // formType: string | null;
   children: any;
   data?: any;
 }
