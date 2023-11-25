@@ -42,8 +42,9 @@
   cursor: pointer;
   border-radius: 20px 20px 0 0;
   width: 100%;
-  height: auto;
-  margin: auto 0;
+  height: 100%;
+  // margin: auto 0;
+  object-fit: cover;
 }
 
 .single__list__box {

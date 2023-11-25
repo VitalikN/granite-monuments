@@ -5,10 +5,14 @@ import { ImageListProps, ImageProps } from "@/types/types";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
 import { MdOutlineDeleteForever, MdOutlineCreate } from "react-icons/md";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AdminProductForm from "./admin/AdminProductForm";
 import { useUpdateMonumentFavoriteMutation } from "@/redux/adminMonumentsApi/adminMonumentsApi";
 import Modal from "./admin/Modal";
+
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+import Link from "next/link";
 
 export const ImageList: React.FC<ImageListProps> = ({
   data,
@@ -20,6 +24,30 @@ export const ImageList: React.FC<ImageListProps> = ({
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const [mutateAsync] = useUpdateMonumentFavoriteMutation();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const lightbox = new SimpleLightbox(`.${styles.single__img}  `, {
+        captionDelay: 250,
+        disableRightClick: true,
+        showCounter: false,
+        scrollZoom: false,
+        alertError: false,
+      });
+
+      lightbox.on("shown.simplelightbox", () => {
+        document.body.classList.add("body-lock");
+      });
+
+      lightbox.on("close.simplelightbox", () => {
+        document.body.classList.remove("body-lock");
+      });
+
+      return () => {
+        lightbox.destroy();
+      };
+    }
+  }, [data]);
 
   const handleOpenUpdateForm = (product: any) => {
     setSelectedProduct(product);
@@ -50,14 +78,21 @@ export const ImageList: React.FC<ImageListProps> = ({
               subtitle,
             }: ImageProps) => (
               <li className={styles.single__item} key={_id}>
-                <Image
-                  className={styles.single__img}
-                  src={url}
-                  alt="catalog/monument-accessories"
-                  width="200"
-                  height="300"
-                  priority={true}
-                />
+                <Link
+                  href={url}
+                  className={` ${styles.single__img}`}
+                  // key={_id}
+                  title={title}
+                >
+                  <Image
+                    className={styles.single__img}
+                    src={url}
+                    alt="catalog/monument-accessories"
+                    width="200"
+                    height="300"
+                    priority={true}
+                  />
+                </Link>
                 <div
                   className={styles.single__list__box}
                   style={{
