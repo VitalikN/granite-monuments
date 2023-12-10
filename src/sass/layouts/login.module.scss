@@ -82,7 +82,7 @@
   color: red;
   position: absolute;
   left: 0;
-  top: 80px;
+  bottom: 3px;
   opacity: 0.9;
 }
 .styledBtn {
@@ -121,4 +121,14 @@
 .input__img {
   display: flex;
   align-items: center;
+}
+.form__box__textarea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 0;
+}
+.textarea {
+  resize: none;
+  height: 147px;
 }

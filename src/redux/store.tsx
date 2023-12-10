@@ -14,6 +14,7 @@ import {
 import { epitaphsApi } from "./epitaphs/epitaphsApi";
 import { monumentsApi } from "./monuments/monumentsApi";
 import { adminMonumentsApi } from "./adminMonumentsApi/adminMonumentsApi";
+import { adminEpitaphsApi } from "./epitaphs/adminEpitaphsApi";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [monumentsApi.reducerPath]: monumentsApi.reducer,
     [adminMonumentsApi.reducerPath]: adminMonumentsApi.reducer,
+    [adminEpitaphsApi.reducerPath]: adminEpitaphsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -32,7 +34,9 @@ const store = configureStore({
       epitaphsApi.middleware,
       authApi.middleware,
       monumentsApi.middleware,
-      adminMonumentsApi.middleware
+      adminMonumentsApi.middleware,
+
+      adminEpitaphsApi.middleware
     ),
 });
 

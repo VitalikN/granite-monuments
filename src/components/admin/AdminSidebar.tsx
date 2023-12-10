@@ -52,6 +52,11 @@ const AdminSidebar = () => {
             <h3 className={styles.admin__text}>Ікони</h3>
           </Link>
         </li>
+        <li className={styles.admin__item}>
+          <Link href="/admin/admin-epitaphs" className={styles.admin__link}>
+            <h3 className={styles.admin__text}>Епітафії</h3>
+          </Link>
+        </li>
       </ul>
       <div className={styles.admin__box__icon}>
         <h3 className={styles.admin__box__text}>

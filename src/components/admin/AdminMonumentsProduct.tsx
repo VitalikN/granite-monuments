@@ -40,8 +40,9 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
     refetch();
   }, [currentPage, itemsPerPage, category, selectedSubtitle, refetch]);
 
-  if (error || data.total === 0) return <TechnicalWorks title={title} />;
-
+  if (error || !data || data.total === 0 || !data.data) {
+    return <TechnicalWorks title={title} />;
+  }
   return (
     <div className={styles.single__container}>
       <h2 className={styles.single__title}>{title}</h2>

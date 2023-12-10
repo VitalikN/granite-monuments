@@ -2,7 +2,26 @@
 @import "../utils/container.module";
 
 @import "../layouts/monumentsList.module";
+@import "../layouts/imageList.module";
+@import "../layouts/adminSidebar.module";
 
+.admin__text {
+  padding: 20px 10px 0;
+  cursor: pointer;
+  font-family: "Playfair Display", Sans-serif;
+  font-size: 2em;
+  font-weight: 400;
+  line-height: 1em;
+  letter-spacing: 0px;
+
+  color: #bd976e;
+  transition: color 0.5s;
+  text-align: center;
+  @include tablet {
+    font-size: 2.6em;
+    line-height: 1.2em;
+  }
+}
 .epitaph__list {
   display: flex;
   flex-wrap: wrap;
