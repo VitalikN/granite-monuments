@@ -26,10 +26,6 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
     setCurrentPage(1);
   };
 
-  if (isLoading) {
-    return <Loader />;
-  }
-
   if (error || !data || data.total === 0 || !data.data) {
     return <TechnicalWorks title={title} />;
   }
@@ -95,14 +91,16 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
         {isLoading ? (
           <Loader />
         ) : (
-          <ImageList data={data.data} category={category} />
+          <>
+            <ImageList data={data.data} category={category} />
+            <Pagination
+              totalItems={data.total}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage}
+              currentPage={currentPage}
+            />
+          </>
         )}
-        <Pagination
-          totalItems={data.total}
-          itemsPerPage={itemsPerPage}
-          onPageChange={setCurrentPage}
-          currentPage={currentPage}
-        />
       </div>
     </section>
   );

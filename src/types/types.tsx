@@ -81,3 +81,8 @@ export interface ImageProps {
   favorite: boolean;
   subtitle: string;
 }
+export interface EpitaphProps {
+  _id: string;
+  epitaph: string;
+  epitaphNumber: number;
+}

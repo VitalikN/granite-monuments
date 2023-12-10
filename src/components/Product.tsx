@@ -73,6 +73,19 @@ const Product: React.FC = () => {
               <h3 className={styles.product__text}>Ікони</h3>
             </Link>
           </li>
+          <li className={styles.product__item}>
+            <Link href="/catalog/epitaphs" className={styles.product__link}>
+              <Image
+                className={`${styles.product__img} `}
+                src="/epitaphs.jpeg"
+                alt="catalog/epitaph"
+                width="350"
+                height="270"
+                priority={true}
+              />
+              <h3 className={styles.product__text}>Епітафії</h3>
+            </Link>
+          </li>
         </ul>
       </div>
     </section>

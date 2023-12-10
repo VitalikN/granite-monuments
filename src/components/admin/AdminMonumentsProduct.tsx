@@ -40,9 +40,6 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
     refetch();
   }, [currentPage, itemsPerPage, category, selectedSubtitle, refetch]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
   if (error || data.total === 0) return <TechnicalWorks title={title} />;
 
   return (
@@ -54,71 +51,77 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
         closeOnClick
         theme="light"
       />
-      <div
-        className={styles.radio__group__box}
-        style={{
-          display:
-            category === "single" || category === "double" ? "flex" : "none",
-        }}
-      >
-        <p className={styles.radio__text}>Оберіть тип:</p>
-        <div className={styles.radio__group}>
-          <label
-            className={`${styles.radio__label} ${
-              selectedSubtitle === "" ? styles.active : ""
-            }`}
-          >
-            <input
-              className={styles.radio__input}
-              type="radio"
-              value=""
-              checked={selectedSubtitle === ""}
-              onChange={handleSubtitleChange}
-            />
-            Всі
-          </label>
-          <label
-            className={`${styles.radio__label} ${
-              selectedSubtitle === "open" ? styles.active : ""
-            }`}
-          >
-            <input
-              className={styles.radio__input}
-              type="radio"
-              value="open"
-              checked={selectedSubtitle === "open"}
-              onChange={handleSubtitleChange}
-            />
-            Відкриті
-          </label>
-          <label
-            className={`${styles.radio__label} ${
-              selectedSubtitle === "closed" ? styles.active : ""
-            }`}
-          >
-            <input
-              className={styles.radio__input}
-              type="radio"
-              value="closed"
-              checked={selectedSubtitle === "closed"}
-              onChange={handleSubtitleChange}
-            />
-            Закриті
-          </label>
-        </div>
-      </div>
 
-      <ImageList
-        data={data.data}
-        deleteProduct={handleDelete}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <div
+            className={styles.radio__group__box}
+            style={{
+              display:
+                category === "single" || category === "double"
+                  ? "flex"
+                  : "none",
+            }}
+          >
+            <p className={styles.radio__text}>Оберіть тип:</p>
+            <div className={styles.radio__group}>
+              <label
+                className={`${styles.radio__label} ${
+                  selectedSubtitle === "" ? styles.active : ""
+                }`}
+              >
+                <input
+                  className={styles.radio__input}
+                  type="radio"
+                  value=""
+                  checked={selectedSubtitle === ""}
+                  onChange={handleSubtitleChange}
+                />
+                Всі
+              </label>
+              <label
+                className={`${styles.radio__label} ${
+                  selectedSubtitle === "open" ? styles.active : ""
+                }`}
+              >
+                <input
+                  className={styles.radio__input}
+                  type="radio"
+                  value="open"
+                  checked={selectedSubtitle === "open"}
+                  onChange={handleSubtitleChange}
+                />
+                Відкриті
+              </label>
+              <label
+                className={`${styles.radio__label} ${
+                  selectedSubtitle === "closed" ? styles.active : ""
+                }`}
+              >
+                <input
+                  className={styles.radio__input}
+                  type="radio"
+                  value="closed"
+                  checked={selectedSubtitle === "closed"}
+                  onChange={handleSubtitleChange}
+                />
+                Закриті
+              </label>
+            </div>
+          </div>
 
-      <Pagination
-        totalItems={data.total}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPage}
-        currentPage={currentPage}
-      />
+          <ImageList data={data.data} deleteProduct={handleDelete} />
+
+          <Pagination
+            totalItems={data.total}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setCurrentPage}
+            currentPage={currentPage}
+          />
+        </>
+      )}
     </div>
   );
 };

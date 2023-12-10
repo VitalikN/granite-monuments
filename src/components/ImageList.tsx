@@ -17,7 +17,6 @@ import Link from "next/link";
 export const ImageList: React.FC<ImageListProps> = ({
   data,
   deleteProduct,
-  category,
 }) => {
   const isAdmin = useSelector(authSelector.getAdminEmail);
 
