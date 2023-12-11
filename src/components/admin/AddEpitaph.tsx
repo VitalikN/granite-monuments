@@ -24,7 +24,7 @@ interface EpitaphFormProps {
 const AddEpitaph: React.FC<AddEpitaphProps> = ({ onClose, refetch }) => {
   const initialValues = {
     epitaph: "",
-    epitaphNumber: NaN,
+    epitaphNumber: 0,
   };
 
   const [add] = useAddEpitaphMutation();
