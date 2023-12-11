@@ -3,8 +3,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const adminEpitaphsApi = createApi({
   reducerPath: "adminEpitaphsApi",
   baseQuery: fetchBaseQuery({
-    // baseUrl: "https://monuments-backend.onrender.com/api/epitaphs",
-    baseUrl: "http://localhost:3001/api/epitaphs",
+    baseUrl: "https://monuments-backend.onrender.com/api/epitaphs",
+    // baseUrl: "http://localhost:3001/api/epitaphs",
 
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;
