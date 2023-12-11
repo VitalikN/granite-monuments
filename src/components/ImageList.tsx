@@ -13,6 +13,7 @@ import Modal from "./admin/Modal";
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import Link from "next/link";
+import { toast } from "react-toastify";
 
 export const ImageList: React.FC<ImageListProps> = ({
   data,
@@ -56,7 +57,7 @@ export const ImageList: React.FC<ImageListProps> = ({
     try {
       const newFavorite = { favorite: !currentFavorite };
       await mutateAsync({ id, newFavorite });
-      console.log("Успішно оновлено об'єкт", newFavorite);
+      toast.success(`Успішно оновлено об'єкт `);
     } catch (error) {
       console.error("Помилка при оновленні об'єкта", error);
     }

@@ -1,25 +1,28 @@
 "use client";
 
-import { useGetAllEpitaphsQuery } from "@/redux/epitaphs/epitaphsApi";
-import styles from "../../sass/layouts/epitaphsList.module.scss";
 import { useEffect, useState } from "react";
-import { Pagination } from "../Pagination";
+import { ToastContainer, toast } from "react-toastify";
+import { MdOutlineDeleteForever, MdOutlineCreate } from "react-icons/md";
+import { useSelector } from "react-redux";
+import authSelector from "@/redux/auth/authSelector";
+import { useDeleteEpitaphMutation } from "@/redux/epitaphs/adminEpitaphsApi";
+import { useGetAllEpitaphsQuery } from "@/redux/epitaphs/epitaphsApi";
+import { EpitaphProps } from "@/types/types";
+
 import TechnicalWorks from "./TechnicalWorks";
 import Loader from "../Loader";
-import { EpitaphProps } from "@/types/types";
-import { useDeleteEpitaphMutation } from "@/redux/epitaphs/adminEpitaphsApi";
-import { toast } from "react-toastify";
-
-import { MdOutlineDeleteForever } from "react-icons/md";
-import authSelector from "@/redux/auth/authSelector";
-import { useSelector } from "react-redux";
-import AddEpitaph from "../admin/AddEpitaph";
+import { Pagination } from "../Pagination";
 import { useToggleMenu } from "../hooks";
+import AddEpitaph from "../admin/AddEpitaph";
 import Modal from "../admin/Modal";
+import styles from "../../sass/layouts/epitaphsList.module.scss";
+// import UpdateEpitaph from "../admin/UpdateEpitaph";
 
 const EpitaphsList = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+
+  const [epitaphProduct, setEpitaphProduct] = useState(null);
 
   const { menuOpen, setMenuOpen, openForm } = useToggleMenu();
 
@@ -30,6 +33,10 @@ const EpitaphsList = () => {
     page: currentPage,
     limit: itemsPerPage,
   });
+  // const handleOpenUpdateEpitaphForm = (product: any) => {
+  //   setEpitaphProduct(product);
+  //   openForm("UpdateEpitaph");
+  // };
 
   const handleDelete = async (_id: string) => {
     await deleteEpitaph(_id).unwrap();
@@ -38,7 +45,7 @@ const EpitaphsList = () => {
   };
   useEffect(() => {
     refetch();
-  }, [currentPage, itemsPerPage, refetch]);
+  }, [currentPage, itemsPerPage, refetch, data]);
 
   if (error || !data || data.total === 0 || !data.data) {
     return <TechnicalWorks title="Епітафії" />;
@@ -53,6 +60,12 @@ const EpitaphsList = () => {
           <>
             {isAdmin && (
               <>
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3000}
+                  closeOnClick
+                  theme="light"
+                />
                 <h3
                   className={styles.admin__text}
                   onClick={() => openForm("addEpitaph")}
@@ -72,10 +85,23 @@ const EpitaphsList = () => {
                       {epitaph}
                     </p>
                     {isAdmin && (
-                      <MdOutlineDeleteForever
-                        className={styles.single__icon}
-                        onClick={() => handleDelete(_id)}
-                      />
+                      <>
+                        {/* <MdOutlineCreate
+                          className={styles.admin__icon}
+                          onClick={() =>
+                            handleOpenUpdateEpitaphForm({
+                              _id,
+                              epitaph,
+                              epitaphNumber,
+                            })
+                          } 
+                        />
+                          */}
+                        <MdOutlineDeleteForever
+                          className={styles.single__icon}
+                          onClick={() => handleDelete(_id)}
+                        />
+                      </>
                     )}
                   </li>
                 )
@@ -93,6 +119,11 @@ const EpitaphsList = () => {
 
         <Modal isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
           <AddEpitaph refetch={refetch} onClose={() => setMenuOpen(false)} />
+          {/* <UpdateEpitaph
+            refetch={refetch}
+            onClose={() => setMenuOpen(false)}
+            data={epitaphProduct}
+          /> */}
         </Modal>
       </div>
     </section>

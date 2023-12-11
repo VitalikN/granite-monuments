@@ -2,7 +2,7 @@ import { ErrorFeedbackProps } from "@/types/types";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 
 import styles from "@/sass/layouts/login.module.scss";
-import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useAddEpitaphMutation } from "@/redux/epitaphs/adminEpitaphsApi";
 import * as Yup from "yup";
 
@@ -15,6 +15,7 @@ interface AddEpitaphProps {
   onClose: () => void;
   refetch: () => void;
 }
+
 interface EpitaphFormProps {
   epitaph: string;
   epitaphNumber: number;
@@ -23,7 +24,7 @@ interface EpitaphFormProps {
 const AddEpitaph: React.FC<AddEpitaphProps> = ({ onClose, refetch }) => {
   const initialValues = {
     epitaph: "",
-    epitaphNumber: 0,
+    epitaphNumber: NaN,
   };
 
   const [add] = useAddEpitaphMutation();
@@ -33,10 +34,14 @@ const AddEpitaph: React.FC<AddEpitaphProps> = ({ onClose, refetch }) => {
     { resetForm }: { resetForm: () => void }
   ) => {
     try {
-      await add(values).unwrap();
-      resetForm();
-      onClose();
-      refetch();
+      const res = await add(values).unwrap();
+      if (res) {
+        toast.success(`Епітафій додано`);
+
+        resetForm();
+        onClose();
+        refetch();
+      }
     } catch (error) {
       console.log("error");
     }
@@ -53,24 +58,14 @@ const AddEpitaph: React.FC<AddEpitaphProps> = ({ onClose, refetch }) => {
   return (
     <Formik
       initialValues={initialValues}
-      //   validationSchema={action === "add" ? addSchema : updateSchema}
       validationSchema={addEpitaphSchema}
       onSubmit={handleSubmit}
       enableReinitialize
     >
       {({ errors, touched }) => (
         <Form className={styles.form}>
-          <h2 className={styles.title}>
-            Додати Епітафій
-            {/* {action === "add" ? "Додати пам'ятник" : "Оновити дані пам'ятника"} */}
-          </h2>
+          <h2 className={styles.title}>Додати Епітафій</h2>
 
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            closeOnClick
-            theme="light"
-          />
           <div className={styles.form__box}>
             <label className={styles.label}>
               Номер:
