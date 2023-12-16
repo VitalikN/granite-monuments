@@ -62,17 +62,15 @@ const Login: React.FC = () => {
               <button className={styles.styledBtn} type="submit">
                 {isLoading ? "Loading...." : "Вхід"}
               </button>
-              {isError && (
-                <ToastContainer
-                  position="top-right"
-                  autoClose={3000}
-                  closeOnClick
-                  theme="light"
-                />
-              )}
             </Form>
           )}
         </Formik>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          closeOnClick
+          theme="light"
+        />
       </div>
     </section>
   );
