@@ -26,72 +26,76 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
     setCurrentPage(1);
   };
 
-  if (error || !data || data.total === 0 || !data.data) {
-    return <TechnicalWorks title={title} />;
-  }
+  // if (error || !data || data.total === 0 || !data.data) {
+  //   return <TechnicalWorks title={title} />;
+  // }
 
   return (
     <section className={styles.single__section}>
       <div className={styles.container}>
-        <h2 className={styles.single__title}>{title}</h2>
-
-        <div
-          className={styles.radio__group__box}
-          style={{
-            display:
-              category === "single" || category === "double" ? "flex" : "none",
-          }}
-        >
-          <p className={styles.radio__text}>Оберіть тип:</p>
-          <div className={styles.radio__group}>
-            <label
-              className={`${styles.radio__label} ${
-                selectedSubtitle === "" ? styles.active : ""
-              }`}
-            >
-              <input
-                className={styles.radio__input}
-                type="radio"
-                value=""
-                checked={selectedSubtitle === ""}
-                onChange={handleSubtitleChange}
-              />
-              Всі
-            </label>
-            <label
-              className={`${styles.radio__label} ${
-                selectedSubtitle === "open" ? styles.active : ""
-              }`}
-            >
-              <input
-                className={styles.radio__input}
-                type="radio"
-                value="open"
-                checked={selectedSubtitle === "open"}
-                onChange={handleSubtitleChange}
-              />
-              Відкриті
-            </label>
-            <label
-              className={`${styles.radio__label} ${
-                selectedSubtitle === "closed" ? styles.active : ""
-              }`}
-            >
-              <input
-                className={styles.radio__input}
-                type="radio"
-                value="closed"
-                checked={selectedSubtitle === "closed"}
-                onChange={handleSubtitleChange}
-              />
-              Закриті
-            </label>
-          </div>
-        </div>
         {isLoading ? (
           <Loader />
+        ) : error || !data || data.total === 0 || !data.data ? (
+          <TechnicalWorks title={title} />
         ) : (
           <>
+            <h2 className={styles.single__title}>{title}</h2>
+
+            <div
+              className={styles.radio__group__box}
+              style={{
+                display:
+                  category === "single" || category === "double"
+                    ? "flex"
+                    : "none",
+              }}
+            >
+              <p className={styles.radio__text}>Оберіть тип:</p>
+              <div className={styles.radio__group}>
+                <label
+                  className={`${styles.radio__label} ${
+                    selectedSubtitle === "" ? styles.active : ""
+                  }`}
+                >
+                  <input
+                    className={styles.radio__input}
+                    type="radio"
+                    value=""
+                    checked={selectedSubtitle === ""}
+                    onChange={handleSubtitleChange}
+                  />
+                  Всі
+                </label>
+                <label
+                  className={`${styles.radio__label} ${
+                    selectedSubtitle === "open" ? styles.active : ""
+                  }`}
+                >
+                  <input
+                    className={styles.radio__input}
+                    type="radio"
+                    value="open"
+                    checked={selectedSubtitle === "open"}
+                    onChange={handleSubtitleChange}
+                  />
+                  Відкриті
+                </label>
+                <label
+                  className={`${styles.radio__label} ${
+                    selectedSubtitle === "closed" ? styles.active : ""
+                  }`}
+                >
+                  <input
+                    className={styles.radio__input}
+                    type="radio"
+                    value="closed"
+                    checked={selectedSubtitle === "closed"}
+                    onChange={handleSubtitleChange}
+                  />
+                  Закриті
+                </label>
+              </div>
+            </div>
             <ImageList data={data.data} category={category} />
             <Pagination
               totalItems={data.total}

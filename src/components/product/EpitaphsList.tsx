@@ -22,7 +22,7 @@ const EpitaphsList = () => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const [epitaphProduct, setEpitaphProduct] = useState(null);
+  // const [epitaphProduct, setEpitaphProduct] = useState(null);
 
   const { menuOpen, setMenuOpen, openForm } = useToggleMenu();
 
@@ -47,15 +47,14 @@ const EpitaphsList = () => {
     refetch();
   }, [currentPage, itemsPerPage, refetch, data]);
 
-  if (error || !data || data.total === 0 || !data.data) {
-    return <TechnicalWorks title="Епітафії" />;
-  }
   return (
     <section className={styles.single__section}>
       <div className={styles.single__container}>
         <h2 className={styles.single__title}> Поминальні вірші </h2>
         {isLoading ? (
           <Loader />
+        ) : error || !data || data.total === 0 || !data.data ? (
+          <TechnicalWorks title="Епітафії" />
         ) : (
           <>
             {isAdmin && (

@@ -40,12 +40,11 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
     refetch();
   }, [currentPage, itemsPerPage, category, selectedSubtitle, refetch]);
 
-  if (error || !data || data.total === 0 || !data.data) {
-    return <TechnicalWorks title={title} />;
-  }
+  // if (error || !data || data.total === 0 || !data.data) {
+  //   return <TechnicalWorks title={title} />;
+  // }
   return (
     <div className={styles.single__container}>
-      <h2 className={styles.single__title}>{title}</h2>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -55,8 +54,12 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
 
       {isLoading ? (
         <Loader />
+      ) : error || !data || data.total === 0 || !data.data ? (
+        <TechnicalWorks title={title} />
       ) : (
         <>
+          <h2 className={styles.single__title}>{title}</h2>
+
           <div
             className={styles.radio__group__box}
             style={{
