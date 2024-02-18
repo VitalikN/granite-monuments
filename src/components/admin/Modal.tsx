@@ -1,6 +1,6 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { useClickOutside } from "../hooks";
-import React, { RefObject, useState } from "react";
+import React, { RefObject } from "react";
 import { ModalProps } from "@/types/types";
 import styles from "../../sass/layouts/modal.module.scss";
 

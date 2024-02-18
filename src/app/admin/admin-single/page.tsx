@@ -7,11 +7,9 @@ export const metadata = {
 };
 const AdminSingle = () => {
   return (
-    <>
-      <PrivateRoute>
-        <AdminSingleProduct />
-      </PrivateRoute>
-    </>
+    <PrivateRoute>
+      <AdminSingleProduct />
+    </PrivateRoute>
   );
 };
 

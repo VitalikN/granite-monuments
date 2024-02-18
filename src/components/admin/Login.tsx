@@ -1,26 +1,19 @@
 "use client";
 
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 
-import styles from "@/sass/layouts/login.module.scss";
 import { useDynamicHeight, useLogin } from "../hooks";
-import { ErrorFeedbackProps } from "@/types/types";
 import { validationSchema } from "@/types/validationSchemas";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ErrorFeedback from "./ErrorFeedback";
+import styles from "@/sass/layouts/login.module.scss";
 
 const Login: React.FC = () => {
   const { isLoading, isError, handleSubmit } = useLogin();
   const dynamicHeight = useDynamicHeight(320, 320);
 
-  const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
-    return (
-      <ErrorMessage name={name}>
-        {(errorMessage) => <span className={styles.error}>{errorMessage}</span>}
-      </ErrorMessage>
-    );
-  };
   return (
     <section
       className={styles.section__login}

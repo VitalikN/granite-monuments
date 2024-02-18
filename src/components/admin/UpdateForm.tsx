@@ -1,34 +1,23 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import {
-  ErrorFeedbackProps,
-  FormValues,
-  ModalPropsUpdate,
-} from "@/types/types";
-
-import styles from "@/sass/layouts/login.module.scss";
-
-import { validationSchemaUpdate } from "@/types/validationSchemas";
 import { useUpdateMutation } from "@/redux/auth/authAPI";
 import authSelector from "@/redux/auth/authSelector";
 import { useSelector } from "react-redux";
+import { Formik, Form, Field } from "formik";
+import { FormValues, ModalPropsUpdate } from "@/types/types";
+
+import { validationSchemaUpdate } from "@/types/validationSchemas";
 import { toast } from "react-toastify";
+import ErrorFeedback from "./ErrorFeedback";
+import styles from "@/sass/layouts/login.module.scss";
 
 const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
   const email = useSelector(authSelector.getAdminEmail);
-  const initialValues = {
+  const initialValuesEmail = {
     email,
     password: "",
   };
 
   const [update] = useUpdateMutation();
-  const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
-    return (
-      <ErrorMessage name={name}>
-        {(errorMessage) => <span className={styles.error}>{errorMessage}</span>}
-      </ErrorMessage>
-    );
-  };
 
   const handleSubmit = async (values: FormValues) => {
     try {
@@ -42,7 +31,7 @@ const UpdateForm: React.FC<ModalPropsUpdate> = ({ onClose }) => {
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initialValuesEmail}
       validationSchema={validationSchemaUpdate}
       onSubmit={(values, { resetForm }) => {
         handleSubmit(values);

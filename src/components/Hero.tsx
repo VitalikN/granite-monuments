@@ -1,6 +1,6 @@
 "use client";
-import styles from "../sass/layouts/hero.module.scss";
 import { useDynamicHeight } from "./hooks";
+import styles from "../sass/layouts/hero.module.scss";
 
 const Hero: React.FC = () => {
   const dynamicHeight = useDynamicHeight();

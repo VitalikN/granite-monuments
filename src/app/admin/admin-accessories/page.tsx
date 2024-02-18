@@ -8,11 +8,9 @@ export const metadata = {
 
 const AdminAccessories = () => {
   return (
-    <>
-      <PrivateRoute>
-        <AdminAccessoriesProduct />
-      </PrivateRoute>
-    </>
+    <PrivateRoute>
+      <AdminAccessoriesProduct />
+    </PrivateRoute>
   );
 };
 

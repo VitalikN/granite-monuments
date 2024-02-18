@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import styles from "../sass/layouts/imageList.module.scss";
 import { ImageListProps, ImageProps } from "@/types/types";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
@@ -14,6 +13,7 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import styles from "../sass/layouts/imageList.module.scss";
 
 export const ImageList: React.FC<ImageListProps> = ({
   data,

@@ -1,33 +1,18 @@
-import { ErrorFeedbackProps } from "@/types/types";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { AddEpitaphProps, EpitaphFormProps } from "@/types/types";
+import { Formik, Field, Form } from "formik";
 
-import styles from "@/sass/layouts/login.module.scss";
 import { toast } from "react-toastify";
 import { useAddEpitaphMutation } from "@/redux/epitaphs/adminEpitaphsApi";
-import * as Yup from "yup";
-
-export const addEpitaphSchema = Yup.object({
-  epitaph: Yup.string().required("Epitaph is required"),
-  epitaphNumber: Yup.number().required("обов’язкове поле"),
-});
-
-interface AddEpitaphProps {
-  onClose: () => void;
-  refetch: () => void;
-}
-
-interface EpitaphFormProps {
-  epitaph: string;
-  epitaphNumber: number;
-}
+import { addEpitaphSchema } from "@/types/validationSchemas";
+import ErrorFeedback from "./ErrorFeedback";
+import styles from "@/sass/layouts/login.module.scss";
 
 const AddEpitaph: React.FC<AddEpitaphProps> = ({ onClose, refetch }) => {
-  const initialValues = {
+  const [add] = useAddEpitaphMutation();
+  const initialValuesEpitaph = {
     epitaph: "",
     epitaphNumber: 0,
   };
-
-  const [add] = useAddEpitaphMutation();
 
   const handleSubmit = async (
     values: EpitaphFormProps,
@@ -47,17 +32,9 @@ const AddEpitaph: React.FC<AddEpitaphProps> = ({ onClose, refetch }) => {
     }
   };
 
-  const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
-    return (
-      <ErrorMessage name={name}>
-        {(errorMessage) => <span className={styles.error}>{errorMessage}</span>}
-      </ErrorMessage>
-    );
-  };
-
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={initialValuesEpitaph}
       validationSchema={addEpitaphSchema}
       onSubmit={handleSubmit}
       enableReinitialize

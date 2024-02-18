@@ -39,3 +39,7 @@ export const updateSchema = Yup.object({
   price: Yup.number(),
   favorite: Yup.boolean(),
 });
+export const addEpitaphSchema = Yup.object({
+  epitaph: Yup.string().required("Epitaph is required"),
+  epitaphNumber: Yup.number().required("обов’язкове поле"),
+});

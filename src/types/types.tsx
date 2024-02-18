@@ -86,3 +86,13 @@ export interface EpitaphProps {
   epitaph: string;
   epitaphNumber: number;
 }
+
+export interface AddEpitaphProps {
+  onClose: () => void;
+  refetch: () => void;
+}
+
+export interface EpitaphFormProps {
+  epitaph: string;
+  epitaphNumber: number;
+}

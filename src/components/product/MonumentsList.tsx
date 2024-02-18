@@ -1,13 +1,13 @@
 import { FC, useState } from "react";
-import { Pagination } from "../Pagination";
+import Pagination from "../Pagination";
 import { ImageList } from "../ImageList";
 
-import styles from "../../sass/layouts/monumentsList.module.scss";
 import { MonumentsListProps } from "@/types/types";
 import { useGetAllMonumentsQuery } from "@/redux/monuments/monumentsApi";
 import TechnicalWorks from "./TechnicalWorks";
 import Loader from "../Loader";
 
+import styles from "../../sass/layouts/monumentsList.module.scss";
 const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
@@ -25,10 +25,6 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
     setSelectedSubtitle(newSubtitle);
     setCurrentPage(1);
   };
-
-  // if (error || !data || data.total === 0 || !data.data) {
-  //   return <TechnicalWorks title={title} />;
-  // }
 
   return (
     <section className={styles.single__section}>

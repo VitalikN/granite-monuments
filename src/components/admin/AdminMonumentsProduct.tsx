@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from "react";
-import { Pagination } from "../Pagination";
-import { ImageList } from "../ImageList";
 
-import styles from "../../sass/layouts/monumentsList.module.scss";
+import { ToastContainer, toast } from "react-toastify";
 import { MonumentsListProps } from "@/types/types";
 import {
   useDeleteMonumentMutation,
   useGetAllMonumentsProductQuery,
 } from "@/redux/adminMonumentsApi/adminMonumentsApi";
+import Pagination from "../Pagination";
+import { ImageList } from "../ImageList";
 import TechnicalWorks from "../product/TechnicalWorks";
-import { ToastContainer, toast } from "react-toastify";
 import Loader from "../Loader";
+import styles from "../../sass/layouts/monumentsList.module.scss";
 
 const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   const [selectedSubtitle, setSelectedSubtitle] = useState("");

@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import MenuItems from "./MenuItems";
 import Link from "next/link";
 
-import styles from "../sass/layouts/header.module.scss";
 import { useToggleMenu } from "./hooks";
+import styles from "../sass/layouts/header.module.scss";
 
 const Header: React.FC = () => {
   const { menuOpen, setMenuOpen } = useToggleMenu();

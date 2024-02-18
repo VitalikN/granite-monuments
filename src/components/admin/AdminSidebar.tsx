@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import styles from "../../sass/layouts/adminSidebar.module.scss";
 import { FiLogOut } from "react-icons/fi";
 import { useToggleMenu } from "../hooks";
 import { useLogoutMutation } from "@/redux/auth/authAPI";
@@ -8,6 +7,7 @@ import Modal from "./Modal";
 import { MdOutlineCreate } from "react-icons/md";
 import AdminProductForm from "./AdminProductForm";
 import UpdateForm from "./UpdateForm";
+import styles from "../../sass/layouts/adminSidebar.module.scss";
 
 const AdminSidebar = () => {
   const [logout] = useLogoutMutation();

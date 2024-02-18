@@ -8,11 +8,9 @@ export const metadata = {
 
 const adminIcons = () => {
   return (
-    <>
-      <PrivateRoute>
-        <AdminIconsProduct />
-      </PrivateRoute>
-    </>
+    <PrivateRoute>
+      <AdminIconsProduct />
+    </PrivateRoute>
   );
 };
 

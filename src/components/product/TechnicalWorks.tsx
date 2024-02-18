@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FC } from "react";
-import styles from "../../sass/layouts/monumentsList.module.scss";
 import { MonumentsListProps } from "@/types/types";
+import styles from "../../sass/layouts/monumentsList.module.scss";
 
 const TechnicalWorks: FC<MonumentsListProps> = ({ title }) => {
   return (

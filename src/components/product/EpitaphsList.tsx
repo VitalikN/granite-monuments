@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-import { MdOutlineDeleteForever, MdOutlineCreate } from "react-icons/md";
+import { MdOutlineDeleteForever } from "react-icons/md";
 import { useSelector } from "react-redux";
 import authSelector from "@/redux/auth/authSelector";
 import { useDeleteEpitaphMutation } from "@/redux/epitaphs/adminEpitaphsApi";
@@ -11,7 +11,7 @@ import { EpitaphProps } from "@/types/types";
 
 import TechnicalWorks from "./TechnicalWorks";
 import Loader from "../Loader";
-import { Pagination } from "../Pagination";
+import Pagination from "../Pagination";
 import { useToggleMenu } from "../hooks";
 import AddEpitaph from "../admin/AddEpitaph";
 import Modal from "../admin/Modal";
@@ -33,10 +33,6 @@ const EpitaphsList = () => {
     page: currentPage,
     limit: itemsPerPage,
   });
-  // const handleOpenUpdateEpitaphForm = (product: any) => {
-  //   setEpitaphProduct(product);
-  //   openForm("UpdateEpitaph");
-  // };
 
   const handleDelete = async (_id: string) => {
     await deleteEpitaph(_id).unwrap();

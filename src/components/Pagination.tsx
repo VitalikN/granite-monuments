@@ -1,9 +1,9 @@
 import { FC } from "react";
 
-import styles from "../sass/layouts/pagination.module.scss";
 import { PaginationProps } from "@/types/types";
+import styles from "../sass/layouts/pagination.module.scss";
 
-export const Pagination: FC<PaginationProps> = ({
+const Pagination: FC<PaginationProps> = ({
   totalItems,
   itemsPerPage,
   onPageChange,
@@ -35,3 +35,4 @@ export const Pagination: FC<PaginationProps> = ({
     </div>
   );
 };
+export default Pagination;

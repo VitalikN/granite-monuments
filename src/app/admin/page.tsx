@@ -6,11 +6,7 @@ const LoginOrAdmin = dynamic(
 );
 
 const Admin = () => {
-  return (
-    <>
-      <LoginOrAdmin />
-    </>
-  );
+  return <LoginOrAdmin />;
 };
 
 export default Admin;

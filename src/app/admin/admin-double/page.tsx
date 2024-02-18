@@ -8,14 +8,10 @@ export const metadata = {
 
 const AdminDoubleMonuments = () => {
   return (
-    <>
-      <PrivateRoute>
-        <AdminDoubleMonumentsProduct />
-      </PrivateRoute>
-    </>
+    <PrivateRoute>
+      <AdminDoubleMonumentsProduct />
+    </PrivateRoute>
   );
-
-  // <DoubleMonumentsList />;
 };
 
 export default AdminDoubleMonuments;

@@ -3,11 +3,9 @@ import PrivateRoute from "@/components/admin/PrivateRoute";
 
 const AdminEpitaphs = () => {
   return (
-    <>
-      <PrivateRoute>
-        <AdminEpitaphsProduct />
-      </PrivateRoute>
-    </>
+    <PrivateRoute>
+      <AdminEpitaphsProduct />
+    </PrivateRoute>
   );
 };
 

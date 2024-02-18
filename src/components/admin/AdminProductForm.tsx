@@ -1,10 +1,11 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import styles from "@/sass/layouts/login.module.scss";
-import { addSchema, updateSchema } from "@/types/validationSchemas";
+import { Formik, Field, Form } from "formik";
 import { ToastContainer } from "react-toastify";
-import { ErrorFeedbackProps, AdminProductFormProps } from "@/types/types";
+import { addSchema, updateSchema } from "@/types/validationSchemas";
+import { AdminProductFormProps } from "@/types/types";
 
 import { useFormLogic } from "../hooks";
+import ErrorFeedback from "./ErrorFeedback";
+import styles from "@/sass/layouts/login.module.scss";
 
 const AdminProductForm: React.FC<AdminProductFormProps> = ({
   onClose,
@@ -18,14 +19,6 @@ const AdminProductForm: React.FC<AdminProductFormProps> = ({
     openFileInput,
     selectedFileName,
   } = useFormLogic(onClose, action, data);
-
-  const ErrorFeedback: React.FC<ErrorFeedbackProps> = ({ name }) => {
-    return (
-      <ErrorMessage name={name}>
-        {(errorMessage) => <span className={styles.error}>{errorMessage}</span>}
-      </ErrorMessage>
-    );
-  };
 
   return (
     <Formik

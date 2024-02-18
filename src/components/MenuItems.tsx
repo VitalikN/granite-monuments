@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import { usePathname } from "next/navigation";
 
-import styles from "../sass/layouts/header.module.scss";
 import { MenuItemsProps } from "@/types/types";
+import styles from "../sass/layouts/header.module.scss";
 
 const MenuItems: React.FC<MenuItemsProps> = ({ closeMenu }) => {
   const pathname = usePathname();
