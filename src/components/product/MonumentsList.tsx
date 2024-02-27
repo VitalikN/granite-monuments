@@ -13,7 +13,11 @@ const MonumentsList: FC<MonumentsListProps> = ({ title, category }) => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { data, error, isLoading } = useGetAllMonumentsQuery({
+  const {
+    data = [],
+    error,
+    isLoading,
+  } = useGetAllMonumentsQuery({
     page: currentPage,
     limit: itemsPerPage,
     category: category,

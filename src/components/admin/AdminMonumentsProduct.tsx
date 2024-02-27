@@ -17,7 +17,12 @@ const AdminMonumentsProduct: FC<MonumentsListProps> = ({ title, category }) => {
   const [itemsPerPage, setItemsPerPage] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
-  const { data, error, isLoading, refetch } = useGetAllMonumentsProductQuery({
+  const {
+    data = [],
+    error,
+    isLoading,
+    refetch,
+  } = useGetAllMonumentsProductQuery({
     page: currentPage,
     limit: itemsPerPage,
     category: category,
