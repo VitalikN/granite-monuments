@@ -13,6 +13,9 @@
       ),
       url("/Angel.jpg");
   }
+  @include desktop {
+    height: calc(100vh - 374px);
+  }
 }
 
 .about__overlay {
