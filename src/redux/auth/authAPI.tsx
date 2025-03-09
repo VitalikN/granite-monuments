@@ -5,8 +5,8 @@ import { clearToken } from "./authSlice";
 
 type RootState = ReturnType<typeof store.getState>;
 const baseUrl =
-  process.env.NEXT_PUBLIC_BASE_URL_SECRET_NAME ||
-  process.env.NEXT_PUBLIC_BASE_URL_SECRET_NAME_RE;
+  process.env.NEXT_PUBLIC_BASE_URL_NAME ||
+  process.env.NEXT_PUBLIC_BASE_URL_NAME_RE;
 
 export const authApi = createApi({
   reducerPath: "authApi",
