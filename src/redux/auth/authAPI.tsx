@@ -4,12 +4,15 @@ import store from "../store";
 import { clearToken } from "./authSlice";
 
 type RootState = ReturnType<typeof store.getState>;
+const baseUrl =
+  process.env.NEXT_PUBLIC_BASE_URL_SECRET_NAME ||
+  process.env.NEXT_PUBLIC_BASE_URL_SECRET_NAME_RE;
 
 export const authApi = createApi({
   reducerPath: "authApi",
   baseQuery: fetchBaseQuery({
-    //
-    baseUrl: "https://monuments-backend.onrender.com/api/admin",
+    baseUrl,
+
     // baseUrl: "http://localhost:3001/api/admin",
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;

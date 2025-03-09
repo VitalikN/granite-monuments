@@ -26,6 +26,7 @@ body::-webkit-scrollbar {
 body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  padding-right: 0 !important;
 }
 
 a {
@@ -44,4 +45,5 @@ p {
 }
 .body-lock {
   overflow: hidden !important;
+  padding-right: 0 !important;
 }

@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+const baseUrlEnv =
+  process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL_RE;
+const baseUrl = `${baseUrlEnv}/monuments`;
 export const monumentsApi = createApi({
   reducerPath: "monumentsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://monuments-backend.onrender.com/api/monuments",
     // baseUrl: "http://localhost:3001/api/monuments",
+    baseUrl,
   }),
   tagTypes: ["monuments"],
   endpoints: (builder) => ({

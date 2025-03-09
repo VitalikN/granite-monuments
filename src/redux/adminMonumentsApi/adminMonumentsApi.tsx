@@ -4,12 +4,15 @@ import store from "../store";
 
 type RootState = ReturnType<typeof store.getState>;
 
+const baseUrlEnv =
+  process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL_RE;
+const baseUrl = `${baseUrlEnv}/monuments`;
+
 export const adminMonumentsApi = createApi({
   reducerPath: "adminMonumentsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://monuments-backend.onrender.com/api/monuments",
     // baseUrl: "http://localhost:3001/api/monuments",
-
+    baseUrl,
     prepareHeaders: (headers, { getState }) => {
       const token = (getState() as { auth: { token: string } }).auth.token;
       if (token) {
