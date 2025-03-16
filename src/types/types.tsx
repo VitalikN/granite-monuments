@@ -96,3 +96,7 @@ export interface EpitaphFormProps {
   epitaph: string;
   epitaphNumber: number;
 }
+export interface FormValuesSendMessage {
+  name: string;
+  tel: string;
+}

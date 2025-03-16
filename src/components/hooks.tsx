@@ -225,3 +225,35 @@ export const useToggleMenu = () => {
     openForm,
   };
 };
+
+// export const useScroll = () => {
+//   const [isScrolled, setIsScrolled] = useState(false);
+
+//   useEffect(() => {
+//     if (typeof window === "undefined") return;
+
+//     let lastScrollY = 0;
+//     const handleScroll = () => {
+//       window.requestAnimationFrame(() => {
+//         const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+//         if (scrollY > 300 && lastScrollY <= 300) {
+//           setIsScrolled(true);
+//           console.log("Прокручено більше 300px");
+//         } else if (scrollY <= 300 && lastScrollY > 300) {
+//           setIsScrolled(false);
+//         }
+
+//         lastScrollY = scrollY; // Оновлюємо останнє значення прокручування
+//       });
+//     };
+
+//     window.addEventListener("scroll", handleScroll);
+
+//     return () => {
+//       window.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+
+//   return isScrolled;
+// };

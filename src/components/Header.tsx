@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import { useToggleMenu } from "./hooks";
 import styles from "../sass/layouts/header.module.scss";
+import ButtonWithModal from "./ButtonWithModal";
 
 const Header: React.FC = () => {
   const { menuOpen, setMenuOpen } = useToggleMenu();
@@ -34,6 +35,7 @@ const Header: React.FC = () => {
             +380502636243
           </Link>
         </div>
+        <ButtonWithModal />
       </div>
     </header>
   );

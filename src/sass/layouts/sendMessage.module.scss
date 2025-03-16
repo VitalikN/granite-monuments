@@ -1,0 +1,41 @@
+@import "../utils/mixins.module";
+@import "../utils/container.module";
+
+@import "../layouts/login.module.scss";
+
+.floating__button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #bd976e;
+  border: none;
+  background-color: transparent;
+  font-size: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: shake 0.7s ease-in-out infinite;
+  z-index: 1;
+  transition: all 0.5s;
+  &:hover,
+  &:focus {
+    scale: 1.2;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(10deg);
+  }
+  50% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

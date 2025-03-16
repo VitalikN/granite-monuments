@@ -15,6 +15,7 @@ import { epitaphsApi } from "./epitaphs/epitaphsApi";
 import { monumentsApi } from "./monuments/monumentsApi";
 import { adminMonumentsApi } from "./adminMonumentsApi/adminMonumentsApi";
 import { adminEpitaphsApi } from "./epitaphs/adminEpitaphsApi";
+import { sendMessageApi } from "./sendMessage/sendMessageApi";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     [monumentsApi.reducerPath]: monumentsApi.reducer,
     [adminMonumentsApi.reducerPath]: adminMonumentsApi.reducer,
     [adminEpitaphsApi.reducerPath]: adminEpitaphsApi.reducer,
+    [sendMessageApi.reducerPath]: sendMessageApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -32,10 +34,10 @@ const store = configureStore({
       },
     }).concat(
       epitaphsApi.middleware,
-      authApi.middleware,
       monumentsApi.middleware,
+      sendMessageApi.middleware,
+      authApi.middleware,
       adminMonumentsApi.middleware,
-
       adminEpitaphsApi.middleware
     ),
 });
