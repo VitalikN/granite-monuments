@@ -5,7 +5,9 @@ import store from "../store";
 type RootState = ReturnType<typeof store.getState>;
 
 const baseUrlEnv =
-  process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL_RE;
+  // process.env.NEXT_PUBLIC_BASE_URL || process.env.NEXT_PUBLIC_BASE_URL_RE;
+  process.env.NEXT_PUBLIC_BASE_URL_RE || process.env.NEXT_PUBLIC_BASE_URL;
+
 const baseUrl = `${baseUrlEnv}/monuments`;
 
 export const adminMonumentsApi = createApi({
