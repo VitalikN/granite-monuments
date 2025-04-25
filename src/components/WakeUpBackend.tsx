@@ -4,7 +4,7 @@ import { useGetAllMonumentsQuery } from "@/redux/monuments/monumentsApi";
 
 const WakeUpBackend = () => {
   useGetAllMonumentsQuery(
-    { page: 1, limit: 1, category: "all" },
+    { page: 1, limit: 10, category: "all" },
     { selectFromResult: () => ({}) }
   );
 

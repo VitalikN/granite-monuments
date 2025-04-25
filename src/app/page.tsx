@@ -15,7 +15,7 @@ const Home = () => {
       <Product />
       <Services />
       <Order />
-      <WakeUpBackend />
+      {/* <WakeUpBackend /> */}
     </>
   );
 };
